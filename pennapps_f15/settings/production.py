@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pennapps_f15.apps.users',
+    'django_twilio',
     # 'storages',
     # '{{ project_name }}.apps.accounts',
 )
