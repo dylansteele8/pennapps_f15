@@ -42,7 +42,7 @@ ACTIONS = {
             1: dislike, 2: None, 3: None, 
             4: previous_track, 5: None, 6: next_track,
             7: None, 8: None, 9: None 
-           }
+          }
 
 # Create your views here.
 @twilio_view
@@ -86,17 +86,18 @@ def play(request):
 
 def create_station(user, genre): 
     artists = get_artists(genre)
-    artist = artists['artists']['items'][random.randint(0, 9)]
+    artists = artists['artists']['items']
     client = soundcloud.Client(client_id=SOUNDCLOUD_CLIENT_ID)
-    tracks = client.get('/tracks', q=artist['name'], streamable=True)
-    for track in tracks:
-        if track.streamable:
-            song = Song.objects.create(title=track.title, sid=track.id, genre=track.genre)
-            playlist_song = PlaylistSong.objects.create(song=song, 
-                index=user.playlist.songs.count())
-            user.playlist.songs.add(playlist_song)
+    for artist in artists:
+        tracks = client.get('/tracks', q=artist['name'], streamable=True)
+        for track in tracks:
+            if track.streamable:
+                song = Song.objects.create(title=track.title, sid=track.id, genre=track.genre)
+                playlist_song = PlaylistSong.objects.create(song=song, 
+                    index=user.playlist.songs.count())
+                user.playlist.songs.add(playlist_song)
+                break
     return user.playlist.pk
-
 
 def play_station(pid):
     resp = twilio.twiml.Response()
@@ -116,6 +117,7 @@ def play_station(pid):
 @twilio_view
 def controls(request):
     num = 0
+    
     if request.method == 'POST':
         from_number = request.POST.get('From', None)
         user = MyUser.objects.get(phone_number=from_number)
