@@ -11,11 +11,9 @@ urlpatterns = patterns('',
 
 # Main URL Patterns
 urlpatterns += patterns('',
-    # url(r'^$', 'pennapps_f15.views.home'),
-     url(r'^$', 'django_twilio.views.gather', {
-        'action': '/process_input/'
-    }),
-    url(r'^process_input/$', 'pennapps_f15.views.home'),
+    url(r'^$', 'pennapps_f15.views.home'),
+    url(r'^play$', 'pennapps_f15.views.play'),
+    url(r'^controls$', 'pennapps_f15.views.controls'),
 )
 
 # Development

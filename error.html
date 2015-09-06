@@ -1,0 +1,3101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="robots" content="NONE,NOARCHIVE">
+  <title>TypeError at /play</title>
+  <style type="text/css">
+    html * { padding:0; margin:0; }
+    body * { padding:10px 20px; }
+    body * * { padding:0; }
+    body { font:small sans-serif; }
+    body>div { border-bottom:1px solid #ddd; }
+    h1 { font-weight:normal; }
+    h2 { margin-bottom:.8em; }
+    h2 span { font-size:80%; color:#666; font-weight:normal; }
+    h3 { margin:1em 0 .5em 0; }
+    h4 { margin:0 0 .5em 0; font-weight: normal; }
+    code, pre { font-size: 100%; white-space: pre-wrap; }
+    table { border:1px solid #ccc; border-collapse: collapse; width:100%; background:white; }
+    tbody td, tbody th { vertical-align:top; padding:2px 3px; }
+    thead th { padding:1px 6px 1px 3px; background:#fefefe; text-align:left; font-weight:normal; font-size:11px; border:1px solid #ddd; }
+    tbody th { width:12em; text-align:right; color:#666; padding-right:.5em; }
+    table.vars { margin:5px 0 2px 40px; }
+    table.vars td, table.req td { font-family:monospace; }
+    table td.code { width:100%; }
+    table td.code pre { overflow:hidden; }
+    table.source th { color:#666; }
+    table.source td { font-family:monospace; white-space:pre; border-bottom:1px solid #eee; }
+    ul.traceback { list-style-type:none; color: #222; }
+    ul.traceback li.frame { padding-bottom:1em; color:#666; }
+    ul.traceback li.user { background-color:#e0e0e0; color:#000 }
+    div.context { padding:10px 0; overflow:hidden; }
+    div.context ol { padding-left:30px; margin:0 10px; list-style-position: inside; }
+    div.context ol li { font-family:monospace; white-space:pre; color:#777; cursor:pointer; }
+    div.context ol li pre { display:inline; }
+    div.context ol.context-line li { color:#505050; background-color:#dfdfdf; }
+    div.context ol.context-line li span { position:absolute; right:32px; }
+    .user div.context ol.context-line li { background-color:#bbb; color:#000; }
+    .user div.context ol li { color:#666; }
+    div.commands { margin-left: 40px; }
+    div.commands a { color:#555; text-decoration:none; }
+    .user div.commands a { color: black; }
+    #summary { background: #ffc; }
+    #summary h2 { font-weight: normal; color: #666; }
+    #explanation { background:#eee; }
+    #template, #template-not-exist { background:#f6f6f6; }
+    #template-not-exist ul { margin: 0 0 0 20px; }
+    #unicode-hint { background:#eee; }
+    #traceback { background:#eee; }
+    #requestinfo { background:#f6f6f6; padding-left:120px; }
+    #summary table { border:none; background:transparent; }
+    #requestinfo h2, #requestinfo h3 { position:relative; margin-left:-100px; }
+    #requestinfo h3 { margin-bottom:-1em; }
+    .error { background: #ffc; }
+    .specific { color:#cc3300; font-weight:bold; }
+    h2 span.commands { font-size:.7em;}
+    span.commands a:link {color:#5E5694;}
+    pre.exception_value { font-family: sans-serif; color: #666; font-size: 1.5em; margin: 10px 0 10px 0; }
+  </style>
+  
+  <script type="text/javascript">
+  //<!--
+    function getElementsByClassName(oElm, strTagName, strClassName){
+        // Written by Jonathan Snook, http://www.snook.ca/jon; Add-ons by Robert Nyman, http://www.robertnyman.com
+        var arrElements = (strTagName == "*" && document.all)? document.all :
+        oElm.getElementsByTagName(strTagName);
+        var arrReturnElements = new Array();
+        strClassName = strClassName.replace(/\-/g, "\-");
+        var oRegExp = new RegExp("(^|\s)" + strClassName + "(\s|$)");
+        var oElement;
+        for(var i=0; i<arrElements.length; i++){
+            oElement = arrElements[i];
+            if(oRegExp.test(oElement.className)){
+                arrReturnElements.push(oElement);
+            }
+        }
+        return (arrReturnElements)
+    }
+    function hideAll(elems) {
+      for (var e = 0; e < elems.length; e++) {
+        elems[e].style.display = 'none';
+      }
+    }
+    window.onload = function() {
+      hideAll(getElementsByClassName(document, 'table', 'vars'));
+      hideAll(getElementsByClassName(document, 'ol', 'pre-context'));
+      hideAll(getElementsByClassName(document, 'ol', 'post-context'));
+      hideAll(getElementsByClassName(document, 'div', 'pastebin'));
+    }
+    function toggle() {
+      for (var i = 0; i < arguments.length; i++) {
+        var e = document.getElementById(arguments[i]);
+        if (e) {
+          e.style.display = e.style.display == 'none' ? 'block': 'none';
+        }
+      }
+      return false;
+    }
+    function varToggle(link, id) {
+      toggle('v' + id);
+      var s = link.getElementsByTagName('span')[0];
+      var uarr = String.fromCharCode(0x25b6);
+      var darr = String.fromCharCode(0x25bc);
+      s.innerHTML = s.innerHTML == uarr ? darr : uarr;
+      return false;
+    }
+    function switchPastebinFriendly(link) {
+      s1 = "Switch to copy-and-paste view";
+      s2 = "Switch back to interactive view";
+      link.innerHTML = link.innerHTML == s1 ? s2: s1;
+      toggle('browserTraceback', 'pastebinTraceback');
+      return false;
+    }
+    //-->
+  </script>
+  
+</head>
+<body>
+<div id="summary">
+  <h1>TypeError at /play</h1>
+  <pre class="exception_value">int() argument must be a string or a number, not &#39;Playlist&#39;</pre>
+  <table class="meta">
+
+    <tr>
+      <th>Request Method:</th>
+      <td>POST</td>
+    </tr>
+    <tr>
+      <th>Request URL:</th>
+      <td>http://3b836cc8.ngrok.io/play</td>
+    </tr>
+
+    <tr>
+      <th>Django Version:</th>
+      <td>1.7.4</td>
+    </tr>
+
+    <tr>
+      <th>Exception Type:</th>
+      <td>TypeError</td>
+    </tr>
+
+
+    <tr>
+      <th>Exception Value:</th>
+      <td><pre>int() argument must be a string or a number, not &#39;Playlist&#39;</pre></td>
+    </tr>
+
+
+    <tr>
+      <th>Exception Location:</th>
+      <td>/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/db/models/fields/__init__.py in get_prep_value, line 915</td>
+    </tr>
+
+    <tr>
+      <th>Python Executable:</th>
+      <td>/Users/Dylan/Developer/gits/pennapps_f15/venv/bin/python</td>
+    </tr>
+    <tr>
+      <th>Python Version:</th>
+      <td>2.7.10</td>
+    </tr>
+    <tr>
+      <th>Python Path:</th>
+      <td><pre>[&#39;/Users/Dylan/Developer/gits/pennapps_f15&#39;,
+ &#39;/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python27.zip&#39;,
+ &#39;/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7&#39;,
+ &#39;/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/plat-darwin&#39;,
+ &#39;/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/plat-mac&#39;,
+ &#39;/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/plat-mac/lib-scriptpackages&#39;,
+ &#39;/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/lib-tk&#39;,
+ &#39;/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/lib-old&#39;,
+ &#39;/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/lib-dynload&#39;,
+ &#39;/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7&#39;,
+ &#39;/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-darwin&#39;,
+ &#39;/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-tk&#39;,
+ &#39;/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac&#39;,
+ &#39;/usr/local/Cellar/python/2.7.10_2/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac/lib-scriptpackages&#39;,
+ &#39;/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages&#39;]</pre></td>
+    </tr>
+    <tr>
+      <th>Server time:</th>
+      <td>Sun, 6 Sep 2015 03:12:10 +0000</td>
+    </tr>
+  </table>
+</div>
+
+
+
+
+<div id="traceback">
+  <h2>Traceback <span class="commands"><a href="#" onclick="return switchPastebinFriendly(this);">Switch to copy-and-paste view</a></span></h2>
+  
+  <div id="browserTraceback">
+    <ul class="traceback">
+      
+        <li class="frame django">
+          <code>/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/core/handlers/base.py</code> in <code>get_response</code>
+
+          
+            <div class="context" id="c4576226624">
+              
+                <ol start="104" class="pre-context" id="pre4576226624"><li onclick="toggle('pre4576226624', 'post4576226624')"><pre>                    response = middleware_method(request, callback, callback_args, callback_kwargs)</pre></li><li onclick="toggle('pre4576226624', 'post4576226624')"><pre>                    if response:</pre></li><li onclick="toggle('pre4576226624', 'post4576226624')"><pre>                        break</pre></li><li onclick="toggle('pre4576226624', 'post4576226624')"><pre></pre></li><li onclick="toggle('pre4576226624', 'post4576226624')"><pre>            if response is None:</pre></li><li onclick="toggle('pre4576226624', 'post4576226624')"><pre>                wrapped_callback = self.make_view_atomic(callback)</pre></li><li onclick="toggle('pre4576226624', 'post4576226624')"><pre>                try:</pre></li></ol>
+              
+              <ol start="111" class="context-line"><li onclick="toggle('pre4576226624', 'post4576226624')"><pre>                    response = wrapped_callback(request, *callback_args, **callback_kwargs)</pre> <span>...</span></li></ol>
+              
+                <ol start='112' class="post-context" id="post4576226624"><li onclick="toggle('pre4576226624', 'post4576226624')"><pre>                except Exception as e:</pre></li><li onclick="toggle('pre4576226624', 'post4576226624')"><pre>                    # If the view raised an exception, run it through exception</pre></li><li onclick="toggle('pre4576226624', 'post4576226624')"><pre>                    # middleware, and if the exception middleware returns a</pre></li><li onclick="toggle('pre4576226624', 'post4576226624')"><pre>                    # response, use that. Otherwise, reraise the exception.</pre></li><li onclick="toggle('pre4576226624', 'post4576226624')"><pre>                    for middleware_method in self._exception_middleware:</pre></li><li onclick="toggle('pre4576226624', 'post4576226624')"><pre>                        response = middleware_method(request, e)</pre></li></ol>
+              
+            </div>
+          
+
+          
+            <div class="commands">
+                
+                    <a href="#" onclick="return varToggle(this, '4576226624')"><span>&#x25b6;</span> Local vars</a>
+                
+            </div>
+            <table class="vars" id="v4576226624">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>e</td>
+                    <td class="code"><pre>TypeError(&quot;int() argument must be a string or a number, not &#39;Playlist&#39;&quot;,)</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>callback_args</td>
+                    <td class="code"><pre>()</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>resolver_match</td>
+                    <td class="code"><pre>ResolverMatch(func=&lt;function play at 0x10f570578&gt;, args=(), kwargs={}, url_name=&#39;pennapps_f15.views.play&#39;, app_name=&#39;None&#39;, namespace=&#39;&#39;)</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>middleware_method</td>
+                    <td class="code"><pre>&lt;bound method CsrfViewMiddleware.process_view of &lt;django.middleware.csrf.CsrfViewMiddleware object at 0x10fab5510&gt;&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>self</td>
+                    <td class="code"><pre>&lt;django.core.handlers.wsgi.WSGIHandler object at 0x10ea7fa90&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>request</td>
+                    <td class="code"><pre>&quot;&lt;WSGIRequest\npath:/play,\nGET:&lt;QueryDict: {}&gt;,\nPOST:&lt;QueryDict: {u&#39;FromZip&#39;: [u&#39;98101&#39;], u&#39;From&#39;: [u&#39;+14254959659&#39;], u&#39;FromCity&#39;: [u&#39;SEATTLE&#39;], u&#39;ApiVersion&#39;: [u&#39;2010-04-01&#39;], u&#39;To&#39;: [u&#39;+13042546417&#39;], u&#39;CallStatus&#39;: [u&#39;in-progress&#39;], u&#39;CalledState&#39;: [u&#39;WV&#39;], u&#39;FromState&#39;: [u&#39;WA&#39;], u&#39;Direction&#39;: [u&#39;inbound&#39;], u&#39;ToCity&#39;: [u&#39;BECKLEY&#39;], u&#39;ToZip&#39;: [u&#39;25847&#39;], u&#39;msg&#39;: [u&#39;Gather End&#39;], u&#39;Digits&#39;: [u&#39;8&#39;], u&#39;CallerCity&#39;: [u&#39;SEATTLE&#39;], u&#39;FromCountry&#39;: [u&#39;US&#39;], u&#39;CalledCity&#39;: [u&#39;BECKLEY&#39;], u&#39;CalledCountry&#39;: [u&#39;US&#39;], u&#39;Caller&#39;: [u&#39;+14254959659&#39;], u&#39;CallerZip&#39;: [u&#39;98101&#39;], u&#39;AccountSid&#39;: [u&#39;AC6cf64322b5c685a8f1bb0bf3254841b0&#39;], u&#39;Called&#39;: [u&#39;+13042546417&#39;], u&#39;CallerCountry&#39;: [u&#39;US&#39;], u&#39;CalledZip&#39;: [u&#39;25847&#39;], u&#39;CallSid&#39;: [u&#39;CAb124a9cebfb91952a40f55b6202c9bf1&#39;], u&#39;CallerState&#39;: [u&#39;WA&#39;], u&#39;ToCountry&#39;: [u&#39;US&#39;], u&#39;ToState&#39;: [u&#39;WV&#39;]}&gt;,\nCOOKIES:{},\nMETA:{&#39;Apple_PubSub_Socket_Render&#39;: &#39;/private/tmp/com.apple.launchd.XXj8tmJdPL/Render&#39;,\n &#39;CONTENT_LENGTH&#39;: &#39;501&#39;,\n &#39;CONTENT_TYPE&#39;: &#39;application/x-www-form-urlencoded; charset=UTF-8&#39;,\n u&#39;CSRF_COOKIE&#39;: u&#39;YKfoNqN9qr1hsVXWCUMGdTgQf5jwmjkt&#39;,\n &#39;DATABASE_URL&#39;: &#39;postgres://fwvkabplrbmede:1Vb3lc0ghOHIi2REb-ysTWSd0T@ec2-54-197-245-93.compute-1.amazonaws.com:5432/d28r1lvse2mec7&#39;,\n &#39;DISPLAY&#39;: &#39;/private/tmp/com.apple.launchd.h1izG4SCCH/org.macosforge.xquartz:0&#39;,\n &#39;DJANGO_SECRET_KEY&#39;: &#39;+[#*)q^yQOak*X5&lt;Oy].ds6O74AOslQeu3Y=U-g1Z9E2!$&lt;p[Ca?DRO;=|hbc*ZRpFIXTlJgKoCpxPA~F1+{0(^+L8si3oK^m7&#39;,\n &#39;DJANGO_SETTINGS_MODULE&#39;: &#39;pennapps_f15.settings.development&#39;,\n &#39;GATEWAY_INTERFACE&#39;: &#39;CGI/1.1&#39;,\n &#39;HOME&#39;: &#39;/Users/Dylan&#39;,\n &#39;HTTP_CACHE_CONTROL&#39;: &#39;max-age=259200&#39;,\n &#39;HTTP_CONNECTION&#39;: &#39;close&#39;,\n &#39;HTTP_HOST&#39;: &#39;3b836cc8.ngrok.io&#39;,\n &#39;HTTP_REFERER&#39;: &#39;http://3b836cc8.ngrok.io/&#39;,\n &#39;HTTP_USER_AGENT&#39;: &#39;TwilioProxy/1.1&#39;,\n &#39;HTTP_X_FORWARDED_FOR&#39;: &#39;52.21.200.58&#39;,\n &#39;HTTP_X_TWILIO_SIGNATURE&#39;: &#39;FH+uutPezc1Oz4rBgq2Oznv9jNU=&#39;,\n &#39;ITERM_PROFILE&#39;: &#39;Default&#39;,\n &#39;ITERM_SESSION_ID&#39;: &#39;w0t1p0&#39;,\n &#39;LANG&#39;: &#39;en_US.UTF-8&#39;,\n &#39;LOGNAME&#39;: &#39;Dylan&#39;,\n &#39;PATH&#39;: &#39;/Users/Dylan/Developer/gits/pennapps_f15/venv/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/git/bin:/usr/texbin:/Applications/Postgres.app/Contents/Versions/9.3/bin&#39;,\n &#39;PATH_INFO&#39;: u&#39;/play&#39;,\n &#39;PWD&#39;: &#39;/Users/Dylan/developer/gits/pennapps_f15&#39;,\n &#39;QUERY_STRING&#39;: &#39;&#39;,\n &#39;REMOTE_ADDR&#39;: &#39;127.0.0.1&#39;,\n &#39;REMOTE_HOST&#39;: &#39;&#39;,\n &#39;REQUEST_METHOD&#39;: &#39;POST&#39;,\n &#39;RUN_MAIN&#39;: &#39;true&#39;,\n &#39;SCRIPT_NAME&#39;: u&#39;&#39;,\n &#39;SERVER_NAME&#39;: &#39;1.0.0.127.in-addr.arpa&#39;,\n &#39;SERVER_PORT&#39;: &#39;8000&#39;,\n &#39;SERVER_PROTOCOL&#39;: &#39;HTTP/1.1&#39;,\n &#39;SERVER_SOFTWARE&#39;: &#39;WSGIServer/0.1 Python/2.7.10&#39;,\n &#39;SHELL&#39;: &#39;/bin/bash&#39;,\n &#39;SHLVL&#39;: &#39;2&#39;,\n &#39;SOUNDCLOUD_CLIENT_ID&#39;: &#39;426a3e727f210b08fd411dd22ece217f&#39;,\n &#39;SPOTIFY_CLIENT_ID&#39;: &#39;6dc7e061ba2a458b8a116ca03222874d&#39;,\n &#39;SSH_AUTH_SOCK&#39;: &#39;/private/tmp/com.apple.launchd.MaVmbvessf/Listeners&#39;,\n &#39;TERM&#39;: &#39;xterm-256color&#39;,\n &#39;TERM_PROGRAM&#39;: &#39;iTerm.app&#39;,\n &#39;TMPDIR&#39;: &#39;/var/folders/8x/74xf28052rv2cjqf0cw_4__w0000gn/T/&#39;,\n &#39;TWILIO_ACCOUNT_SID&#39;: &#39;AC6cf64322b5c685a8f1bb0bf3254841b0&#39;,\n &#39;TWILIO_AUTH_TOKEN&#39;: &#39;74c41e9ad304d19350f194c10cba753f&#39;,\n &#39;TZ&#39;: &#39;UTC&#39;,\n &#39;USER&#39;: &#39;Dylan&#39;,\n &#39;VIRTUAL_ENV&#39;: &#39;/Users/Dylan/Developer/gits/pennapps_f15/venv&#39;,\n &#39;XPC_FLAGS&#39;: &#39;0x0&#39;,\n &#39;XPC_SERVICE_NAME&#39;: &#39;0&#39;,\n &#39;_&#39;: &#39;/Users/Dylan/Developer/gits/pennapps_f15/venv/bin/python&#39;,\n &#39;__CF_USER_TEXT_ENCODING&#39;: &#39;0x1F5:0x0:0x0&#39;,\n &#39;wsgi.errors&#39;: &lt;open file &#39;&lt;stderr&gt;&#39;, mode &#39;w&#39; at 0x10daa81e0&gt;,\n &#39;wsgi.file_wrapper&#39;: &lt;class wsgiref.util.FileWrapper at 0x10ec9a050&gt;,\n &#39;wsgi.input&#39;: &lt;socket._fileobject object at 0x10ff7f950&gt;,\n &#39;wsgi.multiprocess&#39;: False,\n &#39;wsgi.multithread&#39;: True,\n &#39;wsgi.run_once&#39;: False,\n &#39;wsgi.url_scheme&#39;: &#39;http&#39;,\n &#39;wsgi.version&#39;: (1, 0)}&gt;&quot;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>callback</td>
+                    <td class="code"><pre>&lt;function play at 0x10f570578&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>wrapped_callback</td>
+                    <td class="code"><pre>&lt;function play at 0x10f570578&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>resolver</td>
+                    <td class="code"><pre>&lt;RegexURLResolver &#39;pennapps_f15.urls&#39; (None:None) ^/&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>callback_kwargs</td>
+                    <td class="code"><pre>{}</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>response</td>
+                    <td class="code"><pre>None</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>urlconf</td>
+                    <td class="code"><pre>&#39;pennapps_f15.urls&#39;</pre></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+        </li>
+      
+        <li class="frame django">
+          <code>/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/views/decorators/csrf.py</code> in <code>wrapped_view</code>
+
+          
+            <div class="context" id="c4576224032">
+              
+                <ol start="50" class="pre-context" id="pre4576224032"><li onclick="toggle('pre4576224032', 'post4576224032')"><pre>    &quot;&quot;&quot;</pre></li><li onclick="toggle('pre4576224032', 'post4576224032')"><pre>    Marks a view function as being exempt from the CSRF view protection.</pre></li><li onclick="toggle('pre4576224032', 'post4576224032')"><pre>    &quot;&quot;&quot;</pre></li><li onclick="toggle('pre4576224032', 'post4576224032')"><pre>    # We could just do view_func.csrf_exempt = True, but decorators</pre></li><li onclick="toggle('pre4576224032', 'post4576224032')"><pre>    # are nicer if they don&#39;t have side-effects, so we return a new</pre></li><li onclick="toggle('pre4576224032', 'post4576224032')"><pre>    # function.</pre></li><li onclick="toggle('pre4576224032', 'post4576224032')"><pre>    def wrapped_view(*args, **kwargs):</pre></li></ol>
+              
+              <ol start="57" class="context-line"><li onclick="toggle('pre4576224032', 'post4576224032')"><pre>        return view_func(*args, **kwargs)</pre> <span>...</span></li></ol>
+              
+                <ol start='58' class="post-context" id="post4576224032"><li onclick="toggle('pre4576224032', 'post4576224032')"><pre>    wrapped_view.csrf_exempt = True</pre></li><li onclick="toggle('pre4576224032', 'post4576224032')"><pre>    return wraps(view_func, assigned=available_attrs(view_func))(wrapped_view)</pre></li></ol>
+              
+            </div>
+          
+
+          
+            <div class="commands">
+                
+                    <a href="#" onclick="return varToggle(this, '4576224032')"><span>&#x25b6;</span> Local vars</a>
+                
+            </div>
+            <table class="vars" id="v4576224032">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>args</td>
+                    <td class="code"><pre>(&lt;WSGIRequest
+path:/play,
+GET:&lt;QueryDict: {}&gt;,
+POST:&lt;QueryDict: {u&#39;FromZip&#39;: [u&#39;98101&#39;], u&#39;From&#39;: [u&#39;+14254959659&#39;], u&#39;FromCity&#39;: [u&#39;SEATTLE&#39;], u&#39;ApiVersion&#39;: [u&#39;2010-04-01&#39;], u&#39;To&#39;: [u&#39;+13042546417&#39;], u&#39;CallStatus&#39;: [u&#39;in-progress&#39;], u&#39;CalledState&#39;: [u&#39;WV&#39;], u&#39;FromState&#39;: [u&#39;WA&#39;], u&#39;Direction&#39;: [u&#39;inbound&#39;], u&#39;ToCity&#39;: [u&#39;BECKLEY&#39;], u&#39;ToZip&#39;: [u&#39;25847&#39;], u&#39;msg&#39;: [u&#39;Gather End&#39;], u&#39;Digits&#39;: [u&#39;8&#39;], u&#39;CallerCity&#39;: [u&#39;SEATTLE&#39;], u&#39;FromCountry&#39;: [u&#39;US&#39;], u&#39;CalledCity&#39;: [u&#39;BECKLEY&#39;], u&#39;CalledCountry&#39;: [u&#39;US&#39;], u&#39;Caller&#39;: [u&#39;+14254959659&#39;], u&#39;CallerZip&#39;: [u&#39;98101&#39;], u&#39;AccountSid&#39;: [u&#39;AC6cf64322b5c685a8f1bb0bf3254841b0&#39;], u&#39;Called&#39;: [u&#39;+13042546417&#39;], u&#39;CallerCountry&#39;: [u&#39;US&#39;], u&#39;CalledZip&#39;: [u&#39;25847&#39;], u&#39;CallSid&#39;: [u&#39;CAb124a9cebfb91952a40f55b6202c9bf1&#39;], u&#39;CallerState&#39;: [u&#39;WA&#39;], u&#39;ToCountry&#39;: [u&#39;US&#39;], u&#39;ToState&#39;: [u&#39;WV&#39;]}&gt;,
+COOKIES:{},
+META:{&#39;Apple_PubSub_Socket_Render&#39;: &#39;/private/tmp/com.apple.launchd.XXj8tmJdPL/Render&#39;,
+ &#39;CONTENT_LENGTH&#39;: &#39;501&#39;,
+ &#39;CONTENT_TYPE&#39;: &#39;application/x-www-form-urlencoded; charset=UTF-8&#39;,
+ u&#39;CSRF_COOKIE&#39;: u&#39;YKfoNqN9qr1hsVXWCUMGdTgQf5jwmjkt&#39;,
+ &#39;DATABASE_URL&#39;: &#39;postgres://fwvkabplrbmede:1Vb3lc0ghOHIi2REb-ysTWSd0T@ec2-54-197-245-93.compute-1.amazonaws.com:5432/d28r1lvse2mec7&#39;,
+ &#39;DISPLAY&#39;: &#39;/private/tmp/com.apple.launchd.h1izG4SCCH/org.macosforge.xquartz:0&#39;,
+ &#39;DJANGO_SECRET_KEY&#39;: &#39;+[#*)q^yQOak*X5&lt;Oy].ds6O74AOslQeu3Y=U-g1Z9E2!$&lt;p[Ca?DRO;=|hbc*ZRpFIXTlJgKoCpxPA~F1+{0(^+L8si3oK^m7&#39;,
+ &#39;DJANGO_SETTINGS_MODULE&#39;: &#39;pennapps_f15.settings.development&#39;,
+ &#39;GATEWAY_INTERFACE&#39;: &#39;CGI/1.1&#39;,
+ &#39;HOME&#39;: &#39;/Users/Dylan&#39;,
+ &#39;HTTP_CACHE_CONTROL&#39;: &#39;max-age=259200&#39;,
+ &#39;HTTP_CONNECTION&#39;: &#39;close&#39;,
+ &#39;HTTP_HOST&#39;: &#39;3b836cc8.ngrok.io&#39;,
+ &#39;HTTP_REFERER&#39;: &#39;http://3b836cc8.ngrok.io/&#39;,
+ &#39;HTTP_USER_AGENT&#39;: &#39;TwilioProxy/1.1&#39;,
+ &#39;HTTP_X_FORWARDED_FOR&#39;: &#39;52.21.200.58&#39;,
+ &#39;HTTP_X_TWILIO_SIGNATURE&#39;: &#39;FH+uutPezc1Oz4rBgq2Oznv9jNU=&#39;,
+ &#39;ITERM_PROFILE&#39;: &#39;Default&#39;,
+ &#39;ITERM_SESSION_ID&#39;: &#39;w0t1p0&#39;,
+ &#39;LANG&#39;: &#39;en_US.UTF-8&#39;,
+ &#39;LOGNAME&#39;: &#39;Dylan&#39;,
+ &#39;PATH&#39;: &#39;/Users/Dylan/Developer/gits/pennapps_f15/venv/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/git/bin:/usr/texbin:/Applications/Postgres.app/Contents/Versions/9.3/bin&#39;,
+ &#39;PATH_INFO&#39;: u&#39;/play&#39;,
+ &#39;PWD&#39;: &#39;/Users/Dylan/developer/gits/pennapps_f15&#39;,
+ &#39;QUERY_STRING&#39;: &#39;&#39;,
+ &#39;REMOTE_ADDR&#39;: &#39;127.0.0.1&#39;,
+ &#39;REMOTE_HOST&#39;: &#39;&#39;,
+ &#39;REQUEST_METHOD&#39;: &#39;POST&#39;,
+ &#39;RUN_MAIN&#39;: &#39;true&#39;,
+ &#39;SCRIPT_NAME&#39;: u&#39;&#39;,
+ &#39;SERVER_NAME&#39;: &#39;1.0.0.127.in-addr.arpa&#39;,
+ &#39;SERVER_PORT&#39;: &#39;8000&#39;,
+ &#39;SERVER_PROTOCOL&#39;: &#39;HTTP/1.1&#39;,
+ &#39;SERVER_SOFTWARE&#39;: &#39;WSGIServer/0.1 Python/2.7.10&#39;,
+ &#39;SHELL&#39;: &#39;/bin/bash&#39;,
+ &#39;SHLVL&#39;: &#39;2&#39;,
+ &#39;SOUNDCLOUD_CLIENT_ID&#39;: &#39;426a3e727f210b08fd411dd22ece217f&#39;,
+ &#39;SPOTIFY_CLIENT_ID&#39;: &#39;6dc7e061ba2a458b8a116ca03222874d&#39;,
+ &#39;SSH_AUTH_SOCK&#39;: &#39;/private/tmp/com.apple.launchd.MaVmbvessf/Listeners&#39;,
+ &#39;TERM&#39;: &#39;xterm-256color&#39;,
+ &#39;TERM_PROGRAM&#39;: &#39;iTerm.app&#39;,
+ &#39;TMPDIR&#39;: &#39;/var/folders/8x/74xf28052rv2cjqf0cw_4__w0000gn/T/&#39;,
+ &#39;TWILIO_ACCOUNT_SID&#39;: &#39;AC6cf64322b5c685a8f1bb0bf3254841b0&#39;,
+ &#39;TWILIO_AUTH_TOKEN&#39;: &#39;74c41e9ad304d19350f194c10cba753f&#39;,
+ &#39;TZ&#39;: &#39;UTC&#39;,
+ &#39;USER&#39;: &#39;Dylan&#39;,
+ &#39;VIRTUAL_ENV&#39;: &#39;/Users/Dylan/Developer/gits/pennapps_f15/venv&#39;,
+ &#39;XPC_FLAGS&#39;: &#39;0x0&#39;,
+ &#39;XPC_SERVICE_NAME&#39;: &#39;0&#39;,
+ &#39;_&#39;: &#39;/Users/Dylan/Developer/gits/pennapps_f15/venv/bin/python&#39;,
+ &#39;__CF_USER_TEXT_ENCODING&#39;: &#39;0x1F5:0x0:0x0&#39;,
+ &#39;wsgi.errors&#39;: &lt;open file &#39;&lt;stderr&gt;&#39;, mode &#39;w&#39; at 0x10daa81e0&gt;,
+ &#39;wsgi.file_wrapper&#39;: &lt;class wsgiref.util.FileWrapper at 0x10ec9a050&gt;,
+ &#39;wsgi.input&#39;: &lt;socket._fileobject object at 0x10ff7f950&gt;,
+ &#39;wsgi.multiprocess&#39;: False,
+ &#39;wsgi.multithread&#39;: True,
+ &#39;wsgi.run_once&#39;: False,
+ &#39;wsgi.url_scheme&#39;: &#39;http&#39;,
+ &#39;wsgi.version&#39;: (1, 0)}&gt;,)</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>view_func</td>
+                    <td class="code"><pre>&lt;function play at 0x10f570500&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>kwargs</td>
+                    <td class="code"><pre>{}</pre></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+        </li>
+      
+        <li class="frame user">
+          <code>/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django_twilio/decorators.py</code> in <code>decorator</code>
+
+          
+            <div class="context" id="c4576224248">
+              
+                <ol start="108" class="pre-context" id="pre4576224248"><li onclick="toggle('pre4576224248', 'post4576224248')"><pre>            True</pre></li><li onclick="toggle('pre4576224248', 'post4576224248')"><pre>        )</pre></li><li onclick="toggle('pre4576224248', 'post4576224248')"><pre>        if check_blacklist:</pre></li><li onclick="toggle('pre4576224248', 'post4576224248')"><pre>            blacklisted_resp = get_blacklisted_response(request)</pre></li><li onclick="toggle('pre4576224248', 'post4576224248')"><pre>            if blacklisted_resp:</pre></li><li onclick="toggle('pre4576224248', 'post4576224248')"><pre>                return blacklisted_resp</pre></li><li onclick="toggle('pre4576224248', 'post4576224248')"><pre></pre></li></ol>
+              
+              <ol start="115" class="context-line"><li onclick="toggle('pre4576224248', 'post4576224248')"><pre>        response = f(request_or_self, *args, **kwargs)</pre> <span>...</span></li></ol>
+              
+                <ol start='116' class="post-context" id="post4576224248"><li onclick="toggle('pre4576224248', 'post4576224248')"><pre></pre></li><li onclick="toggle('pre4576224248', 'post4576224248')"><pre>        if isinstance(response, (text_type, bytes)):</pre></li><li onclick="toggle('pre4576224248', 'post4576224248')"><pre>            return HttpResponse(response, content_type=&#39;application/xml&#39;)</pre></li><li onclick="toggle('pre4576224248', 'post4576224248')"><pre>        elif isinstance(response, Verb):</pre></li><li onclick="toggle('pre4576224248', 'post4576224248')"><pre>            return HttpResponse(str(response), content_type=&#39;application/xml&#39;)</pre></li><li onclick="toggle('pre4576224248', 'post4576224248')"><pre>        else:</pre></li></ol>
+              
+            </div>
+          
+
+          
+            <div class="commands">
+                
+                    <a href="#" onclick="return varToggle(this, '4576224248')"><span>&#x25b6;</span> Local vars</a>
+                
+            </div>
+            <table class="vars" id="v4576224248">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>check_blacklist</td>
+                    <td class="code"><pre>True</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>class_based_view</td>
+                    <td class="code"><pre>False</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>f</td>
+                    <td class="code"><pre>&lt;function play at 0x10f570488&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>use_forgery_protection</td>
+                    <td class="code"><pre>False</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>args</td>
+                    <td class="code"><pre>()</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>request</td>
+                    <td class="code"><pre>&quot;&lt;WSGIRequest\npath:/play,\nGET:&lt;QueryDict: {}&gt;,\nPOST:&lt;QueryDict: {u&#39;FromZip&#39;: [u&#39;98101&#39;], u&#39;From&#39;: [u&#39;+14254959659&#39;], u&#39;FromCity&#39;: [u&#39;SEATTLE&#39;], u&#39;ApiVersion&#39;: [u&#39;2010-04-01&#39;], u&#39;To&#39;: [u&#39;+13042546417&#39;], u&#39;CallStatus&#39;: [u&#39;in-progress&#39;], u&#39;CalledState&#39;: [u&#39;WV&#39;], u&#39;FromState&#39;: [u&#39;WA&#39;], u&#39;Direction&#39;: [u&#39;inbound&#39;], u&#39;ToCity&#39;: [u&#39;BECKLEY&#39;], u&#39;ToZip&#39;: [u&#39;25847&#39;], u&#39;msg&#39;: [u&#39;Gather End&#39;], u&#39;Digits&#39;: [u&#39;8&#39;], u&#39;CallerCity&#39;: [u&#39;SEATTLE&#39;], u&#39;FromCountry&#39;: [u&#39;US&#39;], u&#39;CalledCity&#39;: [u&#39;BECKLEY&#39;], u&#39;CalledCountry&#39;: [u&#39;US&#39;], u&#39;Caller&#39;: [u&#39;+14254959659&#39;], u&#39;CallerZip&#39;: [u&#39;98101&#39;], u&#39;AccountSid&#39;: [u&#39;AC6cf64322b5c685a8f1bb0bf3254841b0&#39;], u&#39;Called&#39;: [u&#39;+13042546417&#39;], u&#39;CallerCountry&#39;: [u&#39;US&#39;], u&#39;CalledZip&#39;: [u&#39;25847&#39;], u&#39;CallSid&#39;: [u&#39;CAb124a9cebfb91952a40f55b6202c9bf1&#39;], u&#39;CallerState&#39;: [u&#39;WA&#39;], u&#39;ToCountry&#39;: [u&#39;US&#39;], u&#39;ToState&#39;: [u&#39;WV&#39;]}&gt;,\nCOOKIES:{},\nMETA:{&#39;Apple_PubSub_Socket_Render&#39;: &#39;/private/tmp/com.apple.launchd.XXj8tmJdPL/Render&#39;,\n &#39;CONTENT_LENGTH&#39;: &#39;501&#39;,\n &#39;CONTENT_TYPE&#39;: &#39;application/x-www-form-urlencoded; charset=UTF-8&#39;,\n u&#39;CSRF_COOKIE&#39;: u&#39;YKfoNqN9qr1hsVXWCUMGdTgQf5jwmjkt&#39;,\n &#39;DATABASE_URL&#39;: &#39;postgres://fwvkabplrbmede:1Vb3lc0ghOHIi2REb-ysTWSd0T@ec2-54-197-245-93.compute-1.amazonaws.com:5432/d28r1lvse2mec7&#39;,\n &#39;DISPLAY&#39;: &#39;/private/tmp/com.apple.launchd.h1izG4SCCH/org.macosforge.xquartz:0&#39;,\n &#39;DJANGO_SECRET_KEY&#39;: &#39;+[#*)q^yQOak*X5&lt;Oy].ds6O74AOslQeu3Y=U-g1Z9E2!$&lt;p[Ca?DRO;=|hbc*ZRpFIXTlJgKoCpxPA~F1+{0(^+L8si3oK^m7&#39;,\n &#39;DJANGO_SETTINGS_MODULE&#39;: &#39;pennapps_f15.settings.development&#39;,\n &#39;GATEWAY_INTERFACE&#39;: &#39;CGI/1.1&#39;,\n &#39;HOME&#39;: &#39;/Users/Dylan&#39;,\n &#39;HTTP_CACHE_CONTROL&#39;: &#39;max-age=259200&#39;,\n &#39;HTTP_CONNECTION&#39;: &#39;close&#39;,\n &#39;HTTP_HOST&#39;: &#39;3b836cc8.ngrok.io&#39;,\n &#39;HTTP_REFERER&#39;: &#39;http://3b836cc8.ngrok.io/&#39;,\n &#39;HTTP_USER_AGENT&#39;: &#39;TwilioProxy/1.1&#39;,\n &#39;HTTP_X_FORWARDED_FOR&#39;: &#39;52.21.200.58&#39;,\n &#39;HTTP_X_TWILIO_SIGNATURE&#39;: &#39;FH+uutPezc1Oz4rBgq2Oznv9jNU=&#39;,\n &#39;ITERM_PROFILE&#39;: &#39;Default&#39;,\n &#39;ITERM_SESSION_ID&#39;: &#39;w0t1p0&#39;,\n &#39;LANG&#39;: &#39;en_US.UTF-8&#39;,\n &#39;LOGNAME&#39;: &#39;Dylan&#39;,\n &#39;PATH&#39;: &#39;/Users/Dylan/Developer/gits/pennapps_f15/venv/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/git/bin:/usr/texbin:/Applications/Postgres.app/Contents/Versions/9.3/bin&#39;,\n &#39;PATH_INFO&#39;: u&#39;/play&#39;,\n &#39;PWD&#39;: &#39;/Users/Dylan/developer/gits/pennapps_f15&#39;,\n &#39;QUERY_STRING&#39;: &#39;&#39;,\n &#39;REMOTE_ADDR&#39;: &#39;127.0.0.1&#39;,\n &#39;REMOTE_HOST&#39;: &#39;&#39;,\n &#39;REQUEST_METHOD&#39;: &#39;POST&#39;,\n &#39;RUN_MAIN&#39;: &#39;true&#39;,\n &#39;SCRIPT_NAME&#39;: u&#39;&#39;,\n &#39;SERVER_NAME&#39;: &#39;1.0.0.127.in-addr.arpa&#39;,\n &#39;SERVER_PORT&#39;: &#39;8000&#39;,\n &#39;SERVER_PROTOCOL&#39;: &#39;HTTP/1.1&#39;,\n &#39;SERVER_SOFTWARE&#39;: &#39;WSGIServer/0.1 Python/2.7.10&#39;,\n &#39;SHELL&#39;: &#39;/bin/bash&#39;,\n &#39;SHLVL&#39;: &#39;2&#39;,\n &#39;SOUNDCLOUD_CLIENT_ID&#39;: &#39;426a3e727f210b08fd411dd22ece217f&#39;,\n &#39;SPOTIFY_CLIENT_ID&#39;: &#39;6dc7e061ba2a458b8a116ca03222874d&#39;,\n &#39;SSH_AUTH_SOCK&#39;: &#39;/private/tmp/com.apple.launchd.MaVmbvessf/Listeners&#39;,\n &#39;TERM&#39;: &#39;xterm-256color&#39;,\n &#39;TERM_PROGRAM&#39;: &#39;iTerm.app&#39;,\n &#39;TMPDIR&#39;: &#39;/var/folders/8x/74xf28052rv2cjqf0cw_4__w0000gn/T/&#39;,\n &#39;TWILIO_ACCOUNT_SID&#39;: &#39;AC6cf64322b5c685a8f1bb0bf3254841b0&#39;,\n &#39;TWILIO_AUTH_TOKEN&#39;: &#39;74c41e9ad304d19350f194c10cba753f&#39;,\n &#39;TZ&#39;: &#39;UTC&#39;,\n &#39;USER&#39;: &#39;Dylan&#39;,\n &#39;VIRTUAL_ENV&#39;: &#39;/Users/Dylan/Developer/gits/pennapps_f15/venv&#39;,\n &#39;XPC_FLAGS&#39;: &#39;0x0&#39;,\n &#39;XPC_SERVICE_NAME&#39;: &#39;0&#39;,\n &#39;_&#39;: &#39;/Users/Dylan/Developer/gits/pennapps_f15/venv/bin/python&#39;,\n &#39;__CF_USER_TEXT_ENCODING&#39;: &#39;0x1F5:0x0:0x0&#39;,\n &#39;wsgi.errors&#39;: &lt;open file &#39;&lt;stderr&gt;&#39;, mode &#39;w&#39; at 0x10daa81e0&gt;,\n &#39;wsgi.file_wrapper&#39;: &lt;class wsgiref.util.FileWrapper at 0x10ec9a050&gt;,\n &#39;wsgi.input&#39;: &lt;socket._fileobject object at 0x10ff7f950&gt;,\n &#39;wsgi.multiprocess&#39;: False,\n &#39;wsgi.multithread&#39;: True,\n &#39;wsgi.run_once&#39;: False,\n &#39;wsgi.url_scheme&#39;: &#39;http&#39;,\n &#39;wsgi.version&#39;: (1, 0)}&gt;&quot;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>kwargs</td>
+                    <td class="code"><pre>{}</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>request_or_self</td>
+                    <td class="code"><pre>&quot;&lt;WSGIRequest\npath:/play,\nGET:&lt;QueryDict: {}&gt;,\nPOST:&lt;QueryDict: {u&#39;FromZip&#39;: [u&#39;98101&#39;], u&#39;From&#39;: [u&#39;+14254959659&#39;], u&#39;FromCity&#39;: [u&#39;SEATTLE&#39;], u&#39;ApiVersion&#39;: [u&#39;2010-04-01&#39;], u&#39;To&#39;: [u&#39;+13042546417&#39;], u&#39;CallStatus&#39;: [u&#39;in-progress&#39;], u&#39;CalledState&#39;: [u&#39;WV&#39;], u&#39;FromState&#39;: [u&#39;WA&#39;], u&#39;Direction&#39;: [u&#39;inbound&#39;], u&#39;ToCity&#39;: [u&#39;BECKLEY&#39;], u&#39;ToZip&#39;: [u&#39;25847&#39;], u&#39;msg&#39;: [u&#39;Gather End&#39;], u&#39;Digits&#39;: [u&#39;8&#39;], u&#39;CallerCity&#39;: [u&#39;SEATTLE&#39;], u&#39;FromCountry&#39;: [u&#39;US&#39;], u&#39;CalledCity&#39;: [u&#39;BECKLEY&#39;], u&#39;CalledCountry&#39;: [u&#39;US&#39;], u&#39;Caller&#39;: [u&#39;+14254959659&#39;], u&#39;CallerZip&#39;: [u&#39;98101&#39;], u&#39;AccountSid&#39;: [u&#39;AC6cf64322b5c685a8f1bb0bf3254841b0&#39;], u&#39;Called&#39;: [u&#39;+13042546417&#39;], u&#39;CallerCountry&#39;: [u&#39;US&#39;], u&#39;CalledZip&#39;: [u&#39;25847&#39;], u&#39;CallSid&#39;: [u&#39;CAb124a9cebfb91952a40f55b6202c9bf1&#39;], u&#39;CallerState&#39;: [u&#39;WA&#39;], u&#39;ToCountry&#39;: [u&#39;US&#39;], u&#39;ToState&#39;: [u&#39;WV&#39;]}&gt;,\nCOOKIES:{},\nMETA:{&#39;Apple_PubSub_Socket_Render&#39;: &#39;/private/tmp/com.apple.launchd.XXj8tmJdPL/Render&#39;,\n &#39;CONTENT_LENGTH&#39;: &#39;501&#39;,\n &#39;CONTENT_TYPE&#39;: &#39;application/x-www-form-urlencoded; charset=UTF-8&#39;,\n u&#39;CSRF_COOKIE&#39;: u&#39;YKfoNqN9qr1hsVXWCUMGdTgQf5jwmjkt&#39;,\n &#39;DATABASE_URL&#39;: &#39;postgres://fwvkabplrbmede:1Vb3lc0ghOHIi2REb-ysTWSd0T@ec2-54-197-245-93.compute-1.amazonaws.com:5432/d28r1lvse2mec7&#39;,\n &#39;DISPLAY&#39;: &#39;/private/tmp/com.apple.launchd.h1izG4SCCH/org.macosforge.xquartz:0&#39;,\n &#39;DJANGO_SECRET_KEY&#39;: &#39;+[#*)q^yQOak*X5&lt;Oy].ds6O74AOslQeu3Y=U-g1Z9E2!$&lt;p[Ca?DRO;=|hbc*ZRpFIXTlJgKoCpxPA~F1+{0(^+L8si3oK^m7&#39;,\n &#39;DJANGO_SETTINGS_MODULE&#39;: &#39;pennapps_f15.settings.development&#39;,\n &#39;GATEWAY_INTERFACE&#39;: &#39;CGI/1.1&#39;,\n &#39;HOME&#39;: &#39;/Users/Dylan&#39;,\n &#39;HTTP_CACHE_CONTROL&#39;: &#39;max-age=259200&#39;,\n &#39;HTTP_CONNECTION&#39;: &#39;close&#39;,\n &#39;HTTP_HOST&#39;: &#39;3b836cc8.ngrok.io&#39;,\n &#39;HTTP_REFERER&#39;: &#39;http://3b836cc8.ngrok.io/&#39;,\n &#39;HTTP_USER_AGENT&#39;: &#39;TwilioProxy/1.1&#39;,\n &#39;HTTP_X_FORWARDED_FOR&#39;: &#39;52.21.200.58&#39;,\n &#39;HTTP_X_TWILIO_SIGNATURE&#39;: &#39;FH+uutPezc1Oz4rBgq2Oznv9jNU=&#39;,\n &#39;ITERM_PROFILE&#39;: &#39;Default&#39;,\n &#39;ITERM_SESSION_ID&#39;: &#39;w0t1p0&#39;,\n &#39;LANG&#39;: &#39;en_US.UTF-8&#39;,\n &#39;LOGNAME&#39;: &#39;Dylan&#39;,\n &#39;PATH&#39;: &#39;/Users/Dylan/Developer/gits/pennapps_f15/venv/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/git/bin:/usr/texbin:/Applications/Postgres.app/Contents/Versions/9.3/bin&#39;,\n &#39;PATH_INFO&#39;: u&#39;/play&#39;,\n &#39;PWD&#39;: &#39;/Users/Dylan/developer/gits/pennapps_f15&#39;,\n &#39;QUERY_STRING&#39;: &#39;&#39;,\n &#39;REMOTE_ADDR&#39;: &#39;127.0.0.1&#39;,\n &#39;REMOTE_HOST&#39;: &#39;&#39;,\n &#39;REQUEST_METHOD&#39;: &#39;POST&#39;,\n &#39;RUN_MAIN&#39;: &#39;true&#39;,\n &#39;SCRIPT_NAME&#39;: u&#39;&#39;,\n &#39;SERVER_NAME&#39;: &#39;1.0.0.127.in-addr.arpa&#39;,\n &#39;SERVER_PORT&#39;: &#39;8000&#39;,\n &#39;SERVER_PROTOCOL&#39;: &#39;HTTP/1.1&#39;,\n &#39;SERVER_SOFTWARE&#39;: &#39;WSGIServer/0.1 Python/2.7.10&#39;,\n &#39;SHELL&#39;: &#39;/bin/bash&#39;,\n &#39;SHLVL&#39;: &#39;2&#39;,\n &#39;SOUNDCLOUD_CLIENT_ID&#39;: &#39;426a3e727f210b08fd411dd22ece217f&#39;,\n &#39;SPOTIFY_CLIENT_ID&#39;: &#39;6dc7e061ba2a458b8a116ca03222874d&#39;,\n &#39;SSH_AUTH_SOCK&#39;: &#39;/private/tmp/com.apple.launchd.MaVmbvessf/Listeners&#39;,\n &#39;TERM&#39;: &#39;xterm-256color&#39;,\n &#39;TERM_PROGRAM&#39;: &#39;iTerm.app&#39;,\n &#39;TMPDIR&#39;: &#39;/var/folders/8x/74xf28052rv2cjqf0cw_4__w0000gn/T/&#39;,\n &#39;TWILIO_ACCOUNT_SID&#39;: &#39;AC6cf64322b5c685a8f1bb0bf3254841b0&#39;,\n &#39;TWILIO_AUTH_TOKEN&#39;: &#39;74c41e9ad304d19350f194c10cba753f&#39;,\n &#39;TZ&#39;: &#39;UTC&#39;,\n &#39;USER&#39;: &#39;Dylan&#39;,\n &#39;VIRTUAL_ENV&#39;: &#39;/Users/Dylan/Developer/gits/pennapps_f15/venv&#39;,\n &#39;XPC_FLAGS&#39;: &#39;0x0&#39;,\n &#39;XPC_SERVICE_NAME&#39;: &#39;0&#39;,\n &#39;_&#39;: &#39;/Users/Dylan/Developer/gits/pennapps_f15/venv/bin/python&#39;,\n &#39;__CF_USER_TEXT_ENCODING&#39;: &#39;0x1F5:0x0:0x0&#39;,\n &#39;wsgi.errors&#39;: &lt;open file &#39;&lt;stderr&gt;&#39;, mode &#39;w&#39; at 0x10daa81e0&gt;,\n &#39;wsgi.file_wrapper&#39;: &lt;class wsgiref.util.FileWrapper at 0x10ec9a050&gt;,\n &#39;wsgi.input&#39;: &lt;socket._fileobject object at 0x10ff7f950&gt;,\n &#39;wsgi.multiprocess&#39;: False,\n &#39;wsgi.multithread&#39;: True,\n &#39;wsgi.run_once&#39;: False,\n &#39;wsgi.url_scheme&#39;: &#39;http&#39;,\n &#39;wsgi.version&#39;: (1, 0)}&gt;&quot;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>blacklisted_resp</td>
+                    <td class="code"><pre>None</pre></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+        </li>
+      
+        <li class="frame user">
+          <code>/Users/Dylan/Developer/gits/pennapps_f15/pennapps_f15/views.py</code> in <code>play</code>
+
+          
+            <div class="context" id="c4557174472">
+              
+                <ol start="81" class="pre-context" id="pre4557174472"><li onclick="toggle('pre4557174472', 'post4557174472')"><pre>    if request.method == &#39;POST&#39;:</pre></li><li onclick="toggle('pre4557174472', 'post4557174472')"><pre>        n = request.POST.get(&#39;Digits&#39;, 1)</pre></li><li onclick="toggle('pre4557174472', 'post4557174472')"><pre>        if len(n) == 1:</pre></li><li onclick="toggle('pre4557174472', 'post4557174472')"><pre>            genre = GENRES[int(n)]</pre></li><li onclick="toggle('pre4557174472', 'post4557174472')"><pre>            playlist = create_station(user, genre)</pre></li><li onclick="toggle('pre4557174472', 'post4557174472')"><pre>        elif len(n) == 4:</pre></li><li onclick="toggle('pre4557174472', 'post4557174472')"><pre>            playlist = int(n)</pre></li></ol>
+              
+              <ol start="88" class="context-line"><li onclick="toggle('pre4557174472', 'post4557174472')"><pre>    return play_station(playlist)</pre> <span>...</span></li></ol>
+              
+                <ol start='89' class="post-context" id="post4557174472"><li onclick="toggle('pre4557174472', 'post4557174472')"><pre></pre></li><li onclick="toggle('pre4557174472', 'post4557174472')"><pre></pre></li><li onclick="toggle('pre4557174472', 'post4557174472')"><pre>def create_station(user, genre): </pre></li><li onclick="toggle('pre4557174472', 'post4557174472')"><pre>    artists = get_artists(genre)</pre></li><li onclick="toggle('pre4557174472', 'post4557174472')"><pre>    artist = artists[&#39;artists&#39;][&#39;items&#39;][random.randint(0, 9)]</pre></li><li onclick="toggle('pre4557174472', 'post4557174472')"><pre>    client = soundcloud.Client(client_id=SOUNDCLOUD_CLIENT_ID)</pre></li></ol>
+              
+            </div>
+          
+
+          
+            <div class="commands">
+                
+                    <a href="#" onclick="return varToggle(this, '4557174472')"><span>&#x25b6;</span> Local vars</a>
+                
+            </div>
+            <table class="vars" id="v4557174472">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>playlist</td>
+                    <td class="code"><pre>Error in formatting: unsupported operand type(s) for +: &#39;int&#39; and &#39;str&#39;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>request</td>
+                    <td class="code"><pre>&quot;&lt;WSGIRequest\npath:/play,\nGET:&lt;QueryDict: {}&gt;,\nPOST:&lt;QueryDict: {u&#39;FromZip&#39;: [u&#39;98101&#39;], u&#39;From&#39;: [u&#39;+14254959659&#39;], u&#39;FromCity&#39;: [u&#39;SEATTLE&#39;], u&#39;ApiVersion&#39;: [u&#39;2010-04-01&#39;], u&#39;To&#39;: [u&#39;+13042546417&#39;], u&#39;CallStatus&#39;: [u&#39;in-progress&#39;], u&#39;CalledState&#39;: [u&#39;WV&#39;], u&#39;FromState&#39;: [u&#39;WA&#39;], u&#39;Direction&#39;: [u&#39;inbound&#39;], u&#39;ToCity&#39;: [u&#39;BECKLEY&#39;], u&#39;ToZip&#39;: [u&#39;25847&#39;], u&#39;msg&#39;: [u&#39;Gather End&#39;], u&#39;Digits&#39;: [u&#39;8&#39;], u&#39;CallerCity&#39;: [u&#39;SEATTLE&#39;], u&#39;FromCountry&#39;: [u&#39;US&#39;], u&#39;CalledCity&#39;: [u&#39;BECKLEY&#39;], u&#39;CalledCountry&#39;: [u&#39;US&#39;], u&#39;Caller&#39;: [u&#39;+14254959659&#39;], u&#39;CallerZip&#39;: [u&#39;98101&#39;], u&#39;AccountSid&#39;: [u&#39;AC6cf64322b5c685a8f1bb0bf3254841b0&#39;], u&#39;Called&#39;: [u&#39;+13042546417&#39;], u&#39;CallerCountry&#39;: [u&#39;US&#39;], u&#39;CalledZip&#39;: [u&#39;25847&#39;], u&#39;CallSid&#39;: [u&#39;CAb124a9cebfb91952a40f55b6202c9bf1&#39;], u&#39;CallerState&#39;: [u&#39;WA&#39;], u&#39;ToCountry&#39;: [u&#39;US&#39;], u&#39;ToState&#39;: [u&#39;WV&#39;]}&gt;,\nCOOKIES:{},\nMETA:{&#39;Apple_PubSub_Socket_Render&#39;: &#39;/private/tmp/com.apple.launchd.XXj8tmJdPL/Render&#39;,\n &#39;CONTENT_LENGTH&#39;: &#39;501&#39;,\n &#39;CONTENT_TYPE&#39;: &#39;application/x-www-form-urlencoded; charset=UTF-8&#39;,\n u&#39;CSRF_COOKIE&#39;: u&#39;YKfoNqN9qr1hsVXWCUMGdTgQf5jwmjkt&#39;,\n &#39;DATABASE_URL&#39;: &#39;postgres://fwvkabplrbmede:1Vb3lc0ghOHIi2REb-ysTWSd0T@ec2-54-197-245-93.compute-1.amazonaws.com:5432/d28r1lvse2mec7&#39;,\n &#39;DISPLAY&#39;: &#39;/private/tmp/com.apple.launchd.h1izG4SCCH/org.macosforge.xquartz:0&#39;,\n &#39;DJANGO_SECRET_KEY&#39;: &#39;+[#*)q^yQOak*X5&lt;Oy].ds6O74AOslQeu3Y=U-g1Z9E2!$&lt;p[Ca?DRO;=|hbc*ZRpFIXTlJgKoCpxPA~F1+{0(^+L8si3oK^m7&#39;,\n &#39;DJANGO_SETTINGS_MODULE&#39;: &#39;pennapps_f15.settings.development&#39;,\n &#39;GATEWAY_INTERFACE&#39;: &#39;CGI/1.1&#39;,\n &#39;HOME&#39;: &#39;/Users/Dylan&#39;,\n &#39;HTTP_CACHE_CONTROL&#39;: &#39;max-age=259200&#39;,\n &#39;HTTP_CONNECTION&#39;: &#39;close&#39;,\n &#39;HTTP_HOST&#39;: &#39;3b836cc8.ngrok.io&#39;,\n &#39;HTTP_REFERER&#39;: &#39;http://3b836cc8.ngrok.io/&#39;,\n &#39;HTTP_USER_AGENT&#39;: &#39;TwilioProxy/1.1&#39;,\n &#39;HTTP_X_FORWARDED_FOR&#39;: &#39;52.21.200.58&#39;,\n &#39;HTTP_X_TWILIO_SIGNATURE&#39;: &#39;FH+uutPezc1Oz4rBgq2Oznv9jNU=&#39;,\n &#39;ITERM_PROFILE&#39;: &#39;Default&#39;,\n &#39;ITERM_SESSION_ID&#39;: &#39;w0t1p0&#39;,\n &#39;LANG&#39;: &#39;en_US.UTF-8&#39;,\n &#39;LOGNAME&#39;: &#39;Dylan&#39;,\n &#39;PATH&#39;: &#39;/Users/Dylan/Developer/gits/pennapps_f15/venv/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/git/bin:/usr/texbin:/Applications/Postgres.app/Contents/Versions/9.3/bin&#39;,\n &#39;PATH_INFO&#39;: u&#39;/play&#39;,\n &#39;PWD&#39;: &#39;/Users/Dylan/developer/gits/pennapps_f15&#39;,\n &#39;QUERY_STRING&#39;: &#39;&#39;,\n &#39;REMOTE_ADDR&#39;: &#39;127.0.0.1&#39;,\n &#39;REMOTE_HOST&#39;: &#39;&#39;,\n &#39;REQUEST_METHOD&#39;: &#39;POST&#39;,\n &#39;RUN_MAIN&#39;: &#39;true&#39;,\n &#39;SCRIPT_NAME&#39;: u&#39;&#39;,\n &#39;SERVER_NAME&#39;: &#39;1.0.0.127.in-addr.arpa&#39;,\n &#39;SERVER_PORT&#39;: &#39;8000&#39;,\n &#39;SERVER_PROTOCOL&#39;: &#39;HTTP/1.1&#39;,\n &#39;SERVER_SOFTWARE&#39;: &#39;WSGIServer/0.1 Python/2.7.10&#39;,\n &#39;SHELL&#39;: &#39;/bin/bash&#39;,\n &#39;SHLVL&#39;: &#39;2&#39;,\n &#39;SOUNDCLOUD_CLIENT_ID&#39;: &#39;426a3e727f210b08fd411dd22ece217f&#39;,\n &#39;SPOTIFY_CLIENT_ID&#39;: &#39;6dc7e061ba2a458b8a116ca03222874d&#39;,\n &#39;SSH_AUTH_SOCK&#39;: &#39;/private/tmp/com.apple.launchd.MaVmbvessf/Listeners&#39;,\n &#39;TERM&#39;: &#39;xterm-256color&#39;,\n &#39;TERM_PROGRAM&#39;: &#39;iTerm.app&#39;,\n &#39;TMPDIR&#39;: &#39;/var/folders/8x/74xf28052rv2cjqf0cw_4__w0000gn/T/&#39;,\n &#39;TWILIO_ACCOUNT_SID&#39;: &#39;AC6cf64322b5c685a8f1bb0bf3254841b0&#39;,\n &#39;TWILIO_AUTH_TOKEN&#39;: &#39;74c41e9ad304d19350f194c10cba753f&#39;,\n &#39;TZ&#39;: &#39;UTC&#39;,\n &#39;USER&#39;: &#39;Dylan&#39;,\n &#39;VIRTUAL_ENV&#39;: &#39;/Users/Dylan/Developer/gits/pennapps_f15/venv&#39;,\n &#39;XPC_FLAGS&#39;: &#39;0x0&#39;,\n &#39;XPC_SERVICE_NAME&#39;: &#39;0&#39;,\n &#39;_&#39;: &#39;/Users/Dylan/Developer/gits/pennapps_f15/venv/bin/python&#39;,\n &#39;__CF_USER_TEXT_ENCODING&#39;: &#39;0x1F5:0x0:0x0&#39;,\n &#39;wsgi.errors&#39;: &lt;open file &#39;&lt;stderr&gt;&#39;, mode &#39;w&#39; at 0x10daa81e0&gt;,\n &#39;wsgi.file_wrapper&#39;: &lt;class wsgiref.util.FileWrapper at 0x10ec9a050&gt;,\n &#39;wsgi.input&#39;: &lt;socket._fileobject object at 0x10ff7f950&gt;,\n &#39;wsgi.multiprocess&#39;: False,\n &#39;wsgi.multithread&#39;: True,\n &#39;wsgi.run_once&#39;: False,\n &#39;wsgi.url_scheme&#39;: &#39;http&#39;,\n &#39;wsgi.version&#39;: (1, 0)}&gt;&quot;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>n</td>
+                    <td class="code"><pre>u&#39;8&#39;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>from_number</td>
+                    <td class="code"><pre>u&#39;+14254959659&#39;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>user</td>
+                    <td class="code"><pre>&lt;MyUser: 14254959659&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>genre</td>
+                    <td class="code"><pre>&#39;Bluegrass&#39;</pre></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+        </li>
+      
+        <li class="frame user">
+          <code>/Users/Dylan/Developer/gits/pennapps_f15/pennapps_f15/views.py</code> in <code>play_station</code>
+
+          
+            <div class="context" id="c4558064384">
+              
+                <ol start="102" class="pre-context" id="pre4558064384"><li onclick="toggle('pre4558064384', 'post4558064384')"><pre>    return user.playlist</pre></li><li onclick="toggle('pre4558064384', 'post4558064384')"><pre></pre></li><li onclick="toggle('pre4558064384', 'post4558064384')"><pre></pre></li><li onclick="toggle('pre4558064384', 'post4558064384')"><pre>def play_station(pid):</pre></li><li onclick="toggle('pre4558064384', 'post4558064384')"><pre>    resp = twilio.twiml.Response()</pre></li><li onclick="toggle('pre4558064384', 'post4558064384')"><pre>    for p in Playlist.objects.all():</pre></li><li onclick="toggle('pre4558064384', 'post4558064384')"><pre>        print(p.pk, p.current_song)</pre></li></ol>
+              
+              <ol start="109" class="context-line"><li onclick="toggle('pre4558064384', 'post4558064384')"><pre>    playlist = Playlist.objects.get(pk=pid)</pre> <span>...</span></li></ol>
+              
+                <ol start='110' class="post-context" id="post4558064384"><li onclick="toggle('pre4558064384', 'post4558064384')"><pre>    song = playlist.songs.get(index=playlist.current_song)</pre></li><li onclick="toggle('pre4558064384', 'post4558064384')"><pre>    with resp.gather(action=&quot;/controls&quot;, numDigits=1) as g:</pre></li><li onclick="toggle('pre4558064384', 'post4558064384')"><pre>        g.say(&quot;Playing &quot; + song.song.title)</pre></li><li onclick="toggle('pre4558064384', 'post4558064384')"><pre>        g.play(song.url)</pre></li><li onclick="toggle('pre4558064384', 'post4558064384')"><pre>        playlist.current_song += 1</pre></li><li onclick="toggle('pre4558064384', 'post4558064384')"><pre>        playlist.save()</pre></li></ol>
+              
+            </div>
+          
+
+          
+            <div class="commands">
+                
+                    <a href="#" onclick="return varToggle(this, '4558064384')"><span>&#x25b6;</span> Local vars</a>
+                
+            </div>
+            <table class="vars" id="v4558064384">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>p</td>
+                    <td class="code"><pre>Error in formatting: unsupported operand type(s) for +: &#39;int&#39; and &#39;str&#39;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>resp</td>
+                    <td class="code"><pre>&lt;twilio.twiml.Response object at 0x10fff2d50&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>pid</td>
+                    <td class="code"><pre>Error in formatting: unsupported operand type(s) for +: &#39;int&#39; and &#39;str&#39;</pre></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+        </li>
+      
+        <li class="frame django">
+          <code>/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/db/models/manager.py</code> in <code>manager_method</code>
+
+          
+            <div class="context" id="c4558061864">
+              
+                <ol start="85" class="pre-context" id="pre4558061864"><li onclick="toggle('pre4558061864', 'post4558061864')"><pre>    def check(self, **kwargs):</pre></li><li onclick="toggle('pre4558061864', 'post4558061864')"><pre>        return []</pre></li><li onclick="toggle('pre4558061864', 'post4558061864')"><pre></pre></li><li onclick="toggle('pre4558061864', 'post4558061864')"><pre>    @classmethod</pre></li><li onclick="toggle('pre4558061864', 'post4558061864')"><pre>    def _get_queryset_methods(cls, queryset_class):</pre></li><li onclick="toggle('pre4558061864', 'post4558061864')"><pre>        def create_method(name, method):</pre></li><li onclick="toggle('pre4558061864', 'post4558061864')"><pre>            def manager_method(self, *args, **kwargs):</pre></li></ol>
+              
+              <ol start="92" class="context-line"><li onclick="toggle('pre4558061864', 'post4558061864')"><pre>                return getattr(self.get_queryset(), name)(*args, **kwargs)</pre> <span>...</span></li></ol>
+              
+                <ol start='93' class="post-context" id="post4558061864"><li onclick="toggle('pre4558061864', 'post4558061864')"><pre>            manager_method.__name__ = method.__name__</pre></li><li onclick="toggle('pre4558061864', 'post4558061864')"><pre>            manager_method.__doc__ = method.__doc__</pre></li><li onclick="toggle('pre4558061864', 'post4558061864')"><pre>            return manager_method</pre></li><li onclick="toggle('pre4558061864', 'post4558061864')"><pre></pre></li><li onclick="toggle('pre4558061864', 'post4558061864')"><pre>        new_methods = {}</pre></li><li onclick="toggle('pre4558061864', 'post4558061864')"><pre>        # Refs http://bugs.python.org/issue1785.</pre></li></ol>
+              
+            </div>
+          
+
+          
+            <div class="commands">
+                
+                    <a href="#" onclick="return varToggle(this, '4558061864')"><span>&#x25b6;</span> Local vars</a>
+                
+            </div>
+            <table class="vars" id="v4558061864">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>self</td>
+                    <td class="code"><pre>&lt;django.db.models.manager.Manager object at 0x10ef72910&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>args</td>
+                    <td class="code"><pre>()</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>name</td>
+                    <td class="code"><pre>&#39;get&#39;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>kwargs</td>
+                    <td class="code"><pre>Error in formatting: unsupported operand type(s) for +: &#39;int&#39; and &#39;str&#39;</pre></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+        </li>
+      
+        <li class="frame django">
+          <code>/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/db/models/query.py</code> in <code>get</code>
+
+          
+            <div class="context" id="c4558063520">
+              
+                <ol start="338" class="pre-context" id="pre4558063520"><li onclick="toggle('pre4558063520', 'post4558063520')"><pre>        return self.query.get_count(using=self.db)</pre></li><li onclick="toggle('pre4558063520', 'post4558063520')"><pre></pre></li><li onclick="toggle('pre4558063520', 'post4558063520')"><pre>    def get(self, *args, **kwargs):</pre></li><li onclick="toggle('pre4558063520', 'post4558063520')"><pre>        &quot;&quot;&quot;</pre></li><li onclick="toggle('pre4558063520', 'post4558063520')"><pre>        Performs the query and returns a single object matching the given</pre></li><li onclick="toggle('pre4558063520', 'post4558063520')"><pre>        keyword arguments.</pre></li><li onclick="toggle('pre4558063520', 'post4558063520')"><pre>        &quot;&quot;&quot;</pre></li></ol>
+              
+              <ol start="345" class="context-line"><li onclick="toggle('pre4558063520', 'post4558063520')"><pre>        clone = self.filter(*args, **kwargs)</pre> <span>...</span></li></ol>
+              
+                <ol start='346' class="post-context" id="post4558063520"><li onclick="toggle('pre4558063520', 'post4558063520')"><pre>        if self.query.can_filter():</pre></li><li onclick="toggle('pre4558063520', 'post4558063520')"><pre>            clone = clone.order_by()</pre></li><li onclick="toggle('pre4558063520', 'post4558063520')"><pre>        if (not clone.query.select_for_update or</pre></li><li onclick="toggle('pre4558063520', 'post4558063520')"><pre>                connections[self.db].features.supports_select_for_update_with_limit):</pre></li><li onclick="toggle('pre4558063520', 'post4558063520')"><pre>            clone = clone[:MAX_GET_RESULTS + 1]</pre></li><li onclick="toggle('pre4558063520', 'post4558063520')"><pre>        num = len(clone)</pre></li></ol>
+              
+            </div>
+          
+
+          
+            <div class="commands">
+                
+                    <a href="#" onclick="return varToggle(this, '4558063520')"><span>&#x25b6;</span> Local vars</a>
+                
+            </div>
+            <table class="vars" id="v4558063520">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>self</td>
+                    <td class="code"><pre>Error in formatting: unsupported operand type(s) for +: &#39;int&#39; and &#39;str&#39;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>args</td>
+                    <td class="code"><pre>()</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>kwargs</td>
+                    <td class="code"><pre>Error in formatting: unsupported operand type(s) for +: &#39;int&#39; and &#39;str&#39;</pre></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+        </li>
+      
+        <li class="frame django">
+          <code>/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/db/models/query.py</code> in <code>filter</code>
+
+          
+            <div class="context" id="c4558063664">
+              
+                <ol start="684" class="pre-context" id="pre4558063664"><li onclick="toggle('pre4558063664', 'post4558063664')"><pre>        return self._clone()</pre></li><li onclick="toggle('pre4558063664', 'post4558063664')"><pre></pre></li><li onclick="toggle('pre4558063664', 'post4558063664')"><pre>    def filter(self, *args, **kwargs):</pre></li><li onclick="toggle('pre4558063664', 'post4558063664')"><pre>        &quot;&quot;&quot;</pre></li><li onclick="toggle('pre4558063664', 'post4558063664')"><pre>        Returns a new QuerySet instance with the args ANDed to the existing</pre></li><li onclick="toggle('pre4558063664', 'post4558063664')"><pre>        set.</pre></li><li onclick="toggle('pre4558063664', 'post4558063664')"><pre>        &quot;&quot;&quot;</pre></li></ol>
+              
+              <ol start="691" class="context-line"><li onclick="toggle('pre4558063664', 'post4558063664')"><pre>        return self._filter_or_exclude(False, *args, **kwargs)</pre> <span>...</span></li></ol>
+              
+                <ol start='692' class="post-context" id="post4558063664"><li onclick="toggle('pre4558063664', 'post4558063664')"><pre></pre></li><li onclick="toggle('pre4558063664', 'post4558063664')"><pre>    def exclude(self, *args, **kwargs):</pre></li><li onclick="toggle('pre4558063664', 'post4558063664')"><pre>        &quot;&quot;&quot;</pre></li><li onclick="toggle('pre4558063664', 'post4558063664')"><pre>        Returns a new QuerySet instance with NOT (args) ANDed to the existing</pre></li><li onclick="toggle('pre4558063664', 'post4558063664')"><pre>        set.</pre></li><li onclick="toggle('pre4558063664', 'post4558063664')"><pre>        &quot;&quot;&quot;</pre></li></ol>
+              
+            </div>
+          
+
+          
+            <div class="commands">
+                
+                    <a href="#" onclick="return varToggle(this, '4558063664')"><span>&#x25b6;</span> Local vars</a>
+                
+            </div>
+            <table class="vars" id="v4558063664">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>self</td>
+                    <td class="code"><pre>Error in formatting: unsupported operand type(s) for +: &#39;int&#39; and &#39;str&#39;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>args</td>
+                    <td class="code"><pre>()</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>kwargs</td>
+                    <td class="code"><pre>Error in formatting: unsupported operand type(s) for +: &#39;int&#39; and &#39;str&#39;</pre></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+        </li>
+      
+        <li class="frame django">
+          <code>/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/db/models/query.py</code> in <code>_filter_or_exclude</code>
+
+          
+            <div class="context" id="c4558062008">
+              
+                <ol start="702" class="pre-context" id="pre4558062008"><li onclick="toggle('pre4558062008', 'post4558062008')"><pre>            assert self.query.can_filter(), \</pre></li><li onclick="toggle('pre4558062008', 'post4558062008')"><pre>                &quot;Cannot filter a query once a slice has been taken.&quot;</pre></li><li onclick="toggle('pre4558062008', 'post4558062008')"><pre></pre></li><li onclick="toggle('pre4558062008', 'post4558062008')"><pre>        clone = self._clone()</pre></li><li onclick="toggle('pre4558062008', 'post4558062008')"><pre>        if negate:</pre></li><li onclick="toggle('pre4558062008', 'post4558062008')"><pre>            clone.query.add_q(~Q(*args, **kwargs))</pre></li><li onclick="toggle('pre4558062008', 'post4558062008')"><pre>        else:</pre></li></ol>
+              
+              <ol start="709" class="context-line"><li onclick="toggle('pre4558062008', 'post4558062008')"><pre>            clone.query.add_q(Q(*args, **kwargs))</pre> <span>...</span></li></ol>
+              
+                <ol start='710' class="post-context" id="post4558062008"><li onclick="toggle('pre4558062008', 'post4558062008')"><pre>        return clone</pre></li><li onclick="toggle('pre4558062008', 'post4558062008')"><pre></pre></li><li onclick="toggle('pre4558062008', 'post4558062008')"><pre>    def complex_filter(self, filter_obj):</pre></li><li onclick="toggle('pre4558062008', 'post4558062008')"><pre>        &quot;&quot;&quot;</pre></li><li onclick="toggle('pre4558062008', 'post4558062008')"><pre>        Returns a new QuerySet instance with filter_obj added to the filters.</pre></li><li onclick="toggle('pre4558062008', 'post4558062008')"><pre></pre></li></ol>
+              
+            </div>
+          
+
+          
+            <div class="commands">
+                
+                    <a href="#" onclick="return varToggle(this, '4558062008')"><span>&#x25b6;</span> Local vars</a>
+                
+            </div>
+            <table class="vars" id="v4558062008">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>negate</td>
+                    <td class="code"><pre>False</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>clone</td>
+                    <td class="code"><pre>Error in formatting: unsupported operand type(s) for +: &#39;int&#39; and &#39;str&#39;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>args</td>
+                    <td class="code"><pre>()</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>self</td>
+                    <td class="code"><pre>Error in formatting: unsupported operand type(s) for +: &#39;int&#39; and &#39;str&#39;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>kwargs</td>
+                    <td class="code"><pre>Error in formatting: unsupported operand type(s) for +: &#39;int&#39; and &#39;str&#39;</pre></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+        </li>
+      
+        <li class="frame django">
+          <code>/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/db/models/sql/query.py</code> in <code>add_q</code>
+
+          
+            <div class="context" id="c4558064960">
+              
+                <ol start="1324" class="pre-context" id="pre4558064960"><li onclick="toggle('pre4558064960', 'post4558064960')"><pre>        # and existing conditions. So, any existing inner join forces the join</pre></li><li onclick="toggle('pre4558064960', 'post4558064960')"><pre>        # type to remain inner. Existing outer joins can however be demoted.</pre></li><li onclick="toggle('pre4558064960', 'post4558064960')"><pre>        # (Consider case where rel_a is LOUTER and rel_a__col=1 is added - if</pre></li><li onclick="toggle('pre4558064960', 'post4558064960')"><pre>        # rel_a doesn&#39;t produce any rows, then the whole condition must fail.</pre></li><li onclick="toggle('pre4558064960', 'post4558064960')"><pre>        # So, demotion is OK.</pre></li><li onclick="toggle('pre4558064960', 'post4558064960')"><pre>        existing_inner = set(</pre></li><li onclick="toggle('pre4558064960', 'post4558064960')"><pre>            (a for a in self.alias_map if self.alias_map[a].join_type == self.INNER))</pre></li></ol>
+              
+              <ol start="1331" class="context-line"><li onclick="toggle('pre4558064960', 'post4558064960')"><pre>        clause, require_inner = self._add_q(where_part, self.used_aliases)</pre> <span>...</span></li></ol>
+              
+                <ol start='1332' class="post-context" id="post4558064960"><li onclick="toggle('pre4558064960', 'post4558064960')"><pre>        self.where.add(clause, AND)</pre></li><li onclick="toggle('pre4558064960', 'post4558064960')"><pre>        for hp in having_parts:</pre></li><li onclick="toggle('pre4558064960', 'post4558064960')"><pre>            clause, _ = self._add_q(hp, self.used_aliases)</pre></li><li onclick="toggle('pre4558064960', 'post4558064960')"><pre>            self.having.add(clause, AND)</pre></li><li onclick="toggle('pre4558064960', 'post4558064960')"><pre>        self.demote_joins(existing_inner)</pre></li><li onclick="toggle('pre4558064960', 'post4558064960')"><pre></pre></li></ol>
+              
+            </div>
+          
+
+          
+            <div class="commands">
+                
+                    <a href="#" onclick="return varToggle(this, '4558064960')"><span>&#x25b6;</span> Local vars</a>
+                
+            </div>
+            <table class="vars" id="v4558064960">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>q_object</td>
+                    <td class="code"><pre>&lt;django.db.models.query_utils.Q object at 0x110c1c4d0&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>self</td>
+                    <td class="code"><pre>&lt;django.db.models.sql.query.Query object at 0x110a7f0d0&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>existing_inner</td>
+                    <td class="code"><pre>set([])</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>having_parts</td>
+                    <td class="code"><pre>[]</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>where_part</td>
+                    <td class="code"><pre>&lt;django.db.models.query_utils.Q object at 0x110c1c4d0&gt;</pre></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+        </li>
+      
+        <li class="frame django">
+          <code>/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/db/models/sql/query.py</code> in <code>_add_q</code>
+
+          
+            <div class="context" id="c4558063016">
+              
+                <ol start="1351" class="pre-context" id="pre4558063016"><li onclick="toggle('pre4558063016', 'post4558063016')"><pre>                child_clause, needed_inner = self._add_q(</pre></li><li onclick="toggle('pre4558063016', 'post4558063016')"><pre>                    child, used_aliases, branch_negated,</pre></li><li onclick="toggle('pre4558063016', 'post4558063016')"><pre>                    current_negated)</pre></li><li onclick="toggle('pre4558063016', 'post4558063016')"><pre>                joinpromoter.add_votes(needed_inner)</pre></li><li onclick="toggle('pre4558063016', 'post4558063016')"><pre>            else:</pre></li><li onclick="toggle('pre4558063016', 'post4558063016')"><pre>                child_clause, needed_inner = self.build_filter(</pre></li><li onclick="toggle('pre4558063016', 'post4558063016')"><pre>                    child, can_reuse=used_aliases, branch_negated=branch_negated,</pre></li></ol>
+              
+              <ol start="1358" class="context-line"><li onclick="toggle('pre4558063016', 'post4558063016')"><pre>                    current_negated=current_negated, connector=connector)</pre> <span>...</span></li></ol>
+              
+                <ol start='1359' class="post-context" id="post4558063016"><li onclick="toggle('pre4558063016', 'post4558063016')"><pre>                joinpromoter.add_votes(needed_inner)</pre></li><li onclick="toggle('pre4558063016', 'post4558063016')"><pre>            target_clause.add(child_clause, connector)</pre></li><li onclick="toggle('pre4558063016', 'post4558063016')"><pre>        needed_inner = joinpromoter.update_join_types(self)</pre></li><li onclick="toggle('pre4558063016', 'post4558063016')"><pre>        return target_clause, needed_inner</pre></li><li onclick="toggle('pre4558063016', 'post4558063016')"><pre></pre></li><li onclick="toggle('pre4558063016', 'post4558063016')"><pre>    def names_to_path(self, names, opts, allow_many=True, fail_on_missing=False):</pre></li></ol>
+              
+            </div>
+          
+
+          
+            <div class="commands">
+                
+                    <a href="#" onclick="return varToggle(this, '4558063016')"><span>&#x25b6;</span> Local vars</a>
+                
+            </div>
+            <table class="vars" id="v4558063016">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>used_aliases</td>
+                    <td class="code"><pre>set([u&#39;users_playlist&#39;])</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>current_negated</td>
+                    <td class="code"><pre>False</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>target_clause</td>
+                    <td class="code"><pre>&lt;django.db.models.sql.where.WhereNode object at 0x110c1cf50&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>branch_negated</td>
+                    <td class="code"><pre>False</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>joinpromoter</td>
+                    <td class="code"><pre>&lt;django.db.models.sql.query.JoinPromoter object at 0x110c1c2d0&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>child</td>
+                    <td class="code"><pre>Error in formatting: unsupported operand type(s) for +: &#39;int&#39; and &#39;str&#39;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>connector</td>
+                    <td class="code"><pre>u&#39;AND&#39;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>q_object</td>
+                    <td class="code"><pre>&lt;django.db.models.query_utils.Q object at 0x110c1c4d0&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>self</td>
+                    <td class="code"><pre>&lt;django.db.models.sql.query.Query object at 0x110a7f0d0&gt;</pre></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+        </li>
+      
+        <li class="frame django">
+          <code>/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/db/models/sql/query.py</code> in <code>build_filter</code>
+
+          
+            <div class="context" id="c4558063088">
+              
+                <ol start="1223" class="pre-context" id="pre4558063088"><li onclick="toggle('pre4558063088', 'post4558063088')"><pre>            # refactored when composite fields lands.</pre></li><li onclick="toggle('pre4558063088', 'post4558063088')"><pre>            condition = field.get_lookup_constraint(self.where_class, alias, targets, sources,</pre></li><li onclick="toggle('pre4558063088', 'post4558063088')"><pre>                                                    lookups, value)</pre></li><li onclick="toggle('pre4558063088', 'post4558063088')"><pre>            lookup_type = lookups[-1]</pre></li><li onclick="toggle('pre4558063088', 'post4558063088')"><pre>        else:</pre></li><li onclick="toggle('pre4558063088', 'post4558063088')"><pre>            assert(len(targets) == 1)</pre></li><li onclick="toggle('pre4558063088', 'post4558063088')"><pre>            col = Col(alias, targets[0], field)</pre></li></ol>
+              
+              <ol start="1230" class="context-line"><li onclick="toggle('pre4558063088', 'post4558063088')"><pre>            condition = self.build_lookup(lookups, col, value)</pre> <span>...</span></li></ol>
+              
+                <ol start='1231' class="post-context" id="post4558063088"><li onclick="toggle('pre4558063088', 'post4558063088')"><pre>            if not condition:</pre></li><li onclick="toggle('pre4558063088', 'post4558063088')"><pre>                # Backwards compat for custom lookups</pre></li><li onclick="toggle('pre4558063088', 'post4558063088')"><pre>                if lookups[0] not in self.query_terms:</pre></li><li onclick="toggle('pre4558063088', 'post4558063088')"><pre>                    raise FieldError(</pre></li><li onclick="toggle('pre4558063088', 'post4558063088')"><pre>                        &quot;Join on field &#39;%s&#39; not permitted. Did you &quot;</pre></li><li onclick="toggle('pre4558063088', 'post4558063088')"><pre>                        &quot;misspell &#39;%s&#39; for the lookup type?&quot; %</pre></li></ol>
+              
+            </div>
+          
+
+          
+            <div class="commands">
+                
+                    <a href="#" onclick="return varToggle(this, '4558063088')"><span>&#x25b6;</span> Local vars</a>
+                
+            </div>
+            <table class="vars" id="v4558063088">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>current_negated</td>
+                    <td class="code"><pre>False</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>branch_negated</td>
+                    <td class="code"><pre>False</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>sources</td>
+                    <td class="code"><pre>(&lt;django.db.models.fields.AutoField: id&gt;,)</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>arg</td>
+                    <td class="code"><pre>&#39;pk&#39;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>targets</td>
+                    <td class="code"><pre>(&lt;django.db.models.fields.AutoField: id&gt;,)</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>reffed_aggregate</td>
+                    <td class="code"><pre>False</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>self</td>
+                    <td class="code"><pre>&lt;django.db.models.sql.query.Query object at 0x110a7f0d0&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>connector</td>
+                    <td class="code"><pre>u&#39;AND&#39;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>field</td>
+                    <td class="code"><pre>&lt;django.db.models.fields.AutoField: id&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>parts</td>
+                    <td class="code"><pre>[&#39;pk&#39;]</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>filter_expr</td>
+                    <td class="code"><pre>Error in formatting: unsupported operand type(s) for +: &#39;int&#39; and &#39;str&#39;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>used_joins</td>
+                    <td class="code"><pre>set([u&#39;users_playlist&#39;])</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>join_list</td>
+                    <td class="code"><pre>[u&#39;users_playlist&#39;]</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>path</td>
+                    <td class="code"><pre>[]</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>can_reuse</td>
+                    <td class="code"><pre>set([u&#39;users_playlist&#39;])</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>allow_many</td>
+                    <td class="code"><pre>True</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>lookups</td>
+                    <td class="code"><pre>[&#39;exact&#39;]</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>clause</td>
+                    <td class="code"><pre>&lt;django.db.models.sql.where.WhereNode object at 0x10fab3b10&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>value</td>
+                    <td class="code"><pre>Error in formatting: unsupported operand type(s) for +: &#39;int&#39; and &#39;str&#39;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>alias</td>
+                    <td class="code"><pre>u&#39;users_playlist&#39;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>col</td>
+                    <td class="code"><pre>&lt;django.db.models.sql.datastructures.Col object at 0x110af3f50&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>opts</td>
+                    <td class="code"><pre>&lt;Options for Playlist&gt;</pre></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+        </li>
+      
+        <li class="frame django">
+          <code>/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/db/models/sql/query.py</code> in <code>build_lookup</code>
+
+          
+            <div class="context" id="c4558062656">
+              
+                <ol start="1131" class="pre-context" id="pre4558062656"><li onclick="toggle('pre4558062656', 'post4558062656')"><pre>    def build_lookup(self, lookups, lhs, rhs):</pre></li><li onclick="toggle('pre4558062656', 'post4558062656')"><pre>        lookups = lookups[:]</pre></li><li onclick="toggle('pre4558062656', 'post4558062656')"><pre>        while lookups:</pre></li><li onclick="toggle('pre4558062656', 'post4558062656')"><pre>            lookup = lookups[0]</pre></li><li onclick="toggle('pre4558062656', 'post4558062656')"><pre>            if len(lookups) == 1:</pre></li><li onclick="toggle('pre4558062656', 'post4558062656')"><pre>                final_lookup = lhs.get_lookup(lookup)</pre></li><li onclick="toggle('pre4558062656', 'post4558062656')"><pre>                if final_lookup:</pre></li></ol>
+              
+              <ol start="1138" class="context-line"><li onclick="toggle('pre4558062656', 'post4558062656')"><pre>                    return final_lookup(lhs, rhs)</pre> <span>...</span></li></ol>
+              
+                <ol start='1139' class="post-context" id="post4558062656"><li onclick="toggle('pre4558062656', 'post4558062656')"><pre>                # We didn&#39;t find a lookup, so we are going to try get_transform</pre></li><li onclick="toggle('pre4558062656', 'post4558062656')"><pre>                # + get_lookup(&#39;exact&#39;).</pre></li><li onclick="toggle('pre4558062656', 'post4558062656')"><pre>                lookups.append(&#39;exact&#39;)</pre></li><li onclick="toggle('pre4558062656', 'post4558062656')"><pre>            next = lhs.get_transform(lookup)</pre></li><li onclick="toggle('pre4558062656', 'post4558062656')"><pre>            if next:</pre></li><li onclick="toggle('pre4558062656', 'post4558062656')"><pre>                lhs = next(lhs, lookups)</pre></li></ol>
+              
+            </div>
+          
+
+          
+            <div class="commands">
+                
+                    <a href="#" onclick="return varToggle(this, '4558062656')"><span>&#x25b6;</span> Local vars</a>
+                
+            </div>
+            <table class="vars" id="v4558062656">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>lookups</td>
+                    <td class="code"><pre>[&#39;exact&#39;]</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>self</td>
+                    <td class="code"><pre>&lt;django.db.models.sql.query.Query object at 0x110a7f0d0&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>lookup</td>
+                    <td class="code"><pre>&#39;exact&#39;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>final_lookup</td>
+                    <td class="code"><pre>&lt;class &#39;django.db.models.lookups.Exact&#39;&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>lhs</td>
+                    <td class="code"><pre>&lt;django.db.models.sql.datastructures.Col object at 0x110af3f50&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>rhs</td>
+                    <td class="code"><pre>Error in formatting: unsupported operand type(s) for +: &#39;int&#39; and &#39;str&#39;</pre></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+        </li>
+      
+        <li class="frame django">
+          <code>/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/db/models/lookups.py</code> in <code>__init__</code>
+
+          
+            <div class="context" id="c4558061936">
+              
+                <ol start="75" class="pre-context" id="pre4558061936"><li onclick="toggle('pre4558061936', 'post4558061936')"><pre></pre></li><li onclick="toggle('pre4558061936', 'post4558061936')"><pre></pre></li><li onclick="toggle('pre4558061936', 'post4558061936')"><pre>class Lookup(RegisterLookupMixin):</pre></li><li onclick="toggle('pre4558061936', 'post4558061936')"><pre>    lookup_name = None</pre></li><li onclick="toggle('pre4558061936', 'post4558061936')"><pre></pre></li><li onclick="toggle('pre4558061936', 'post4558061936')"><pre>    def __init__(self, lhs, rhs):</pre></li><li onclick="toggle('pre4558061936', 'post4558061936')"><pre>        self.lhs, self.rhs = lhs, rhs</pre></li></ol>
+              
+              <ol start="82" class="context-line"><li onclick="toggle('pre4558061936', 'post4558061936')"><pre>        self.rhs = self.get_prep_lookup()</pre> <span>...</span></li></ol>
+              
+                <ol start='83' class="post-context" id="post4558061936"><li onclick="toggle('pre4558061936', 'post4558061936')"><pre></pre></li><li onclick="toggle('pre4558061936', 'post4558061936')"><pre>    def get_prep_lookup(self):</pre></li><li onclick="toggle('pre4558061936', 'post4558061936')"><pre>        return self.lhs.output_field.get_prep_lookup(self.lookup_name, self.rhs)</pre></li><li onclick="toggle('pre4558061936', 'post4558061936')"><pre></pre></li><li onclick="toggle('pre4558061936', 'post4558061936')"><pre>    def get_db_prep_lookup(self, value, connection):</pre></li><li onclick="toggle('pre4558061936', 'post4558061936')"><pre>        return (</pre></li></ol>
+              
+            </div>
+          
+
+          
+            <div class="commands">
+                
+                    <a href="#" onclick="return varToggle(this, '4558061936')"><span>&#x25b6;</span> Local vars</a>
+                
+            </div>
+            <table class="vars" id="v4558061936">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>rhs</td>
+                    <td class="code"><pre>Error in formatting: unsupported operand type(s) for +: &#39;int&#39; and &#39;str&#39;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>lhs</td>
+                    <td class="code"><pre>&lt;django.db.models.sql.datastructures.Col object at 0x110af3f50&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>self</td>
+                    <td class="code"><pre>&lt;django.db.models.lookups.Exact object at 0x110af3ed0&gt;</pre></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+        </li>
+      
+        <li class="frame django">
+          <code>/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/db/models/lookups.py</code> in <code>get_prep_lookup</code>
+
+          
+            <div class="context" id="c4552709544">
+              
+                <ol start="78" class="pre-context" id="pre4552709544"><li onclick="toggle('pre4552709544', 'post4552709544')"><pre>    lookup_name = None</pre></li><li onclick="toggle('pre4552709544', 'post4552709544')"><pre></pre></li><li onclick="toggle('pre4552709544', 'post4552709544')"><pre>    def __init__(self, lhs, rhs):</pre></li><li onclick="toggle('pre4552709544', 'post4552709544')"><pre>        self.lhs, self.rhs = lhs, rhs</pre></li><li onclick="toggle('pre4552709544', 'post4552709544')"><pre>        self.rhs = self.get_prep_lookup()</pre></li><li onclick="toggle('pre4552709544', 'post4552709544')"><pre></pre></li><li onclick="toggle('pre4552709544', 'post4552709544')"><pre>    def get_prep_lookup(self):</pre></li></ol>
+              
+              <ol start="85" class="context-line"><li onclick="toggle('pre4552709544', 'post4552709544')"><pre>        return self.lhs.output_field.get_prep_lookup(self.lookup_name, self.rhs)</pre> <span>...</span></li></ol>
+              
+                <ol start='86' class="post-context" id="post4552709544"><li onclick="toggle('pre4552709544', 'post4552709544')"><pre></pre></li><li onclick="toggle('pre4552709544', 'post4552709544')"><pre>    def get_db_prep_lookup(self, value, connection):</pre></li><li onclick="toggle('pre4552709544', 'post4552709544')"><pre>        return (</pre></li><li onclick="toggle('pre4552709544', 'post4552709544')"><pre>            &#39;%s&#39;, self.lhs.output_field.get_db_prep_lookup(</pre></li><li onclick="toggle('pre4552709544', 'post4552709544')"><pre>                self.lookup_name, value, connection, prepared=True))</pre></li><li onclick="toggle('pre4552709544', 'post4552709544')"><pre></pre></li></ol>
+              
+            </div>
+          
+
+          
+            <div class="commands">
+                
+                    <a href="#" onclick="return varToggle(this, '4552709544')"><span>&#x25b6;</span> Local vars</a>
+                
+            </div>
+            <table class="vars" id="v4552709544">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>self</td>
+                    <td class="code"><pre>&lt;django.db.models.lookups.Exact object at 0x110af3ed0&gt;</pre></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+        </li>
+      
+        <li class="frame django">
+          <code>/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/db/models/fields/__init__.py</code> in <code>get_prep_lookup</code>
+
+          
+            <div class="context" id="c4563250280">
+              
+                <ol start="639" class="pre-context" id="pre4563250280"><li onclick="toggle('pre4563250280', 'post4563250280')"><pre>            &#39;iexact&#39;, &#39;contains&#39;, &#39;icontains&#39;,</pre></li><li onclick="toggle('pre4563250280', 'post4563250280')"><pre>            &#39;startswith&#39;, &#39;istartswith&#39;, &#39;endswith&#39;, &#39;iendswith&#39;,</pre></li><li onclick="toggle('pre4563250280', 'post4563250280')"><pre>            &#39;month&#39;, &#39;day&#39;, &#39;week_day&#39;, &#39;hour&#39;, &#39;minute&#39;, &#39;second&#39;,</pre></li><li onclick="toggle('pre4563250280', 'post4563250280')"><pre>            &#39;isnull&#39;, &#39;search&#39;, &#39;regex&#39;, &#39;iregex&#39;,</pre></li><li onclick="toggle('pre4563250280', 'post4563250280')"><pre>        }:</pre></li><li onclick="toggle('pre4563250280', 'post4563250280')"><pre>            return value</pre></li><li onclick="toggle('pre4563250280', 'post4563250280')"><pre>        elif lookup_type in (&#39;exact&#39;, &#39;gt&#39;, &#39;gte&#39;, &#39;lt&#39;, &#39;lte&#39;):</pre></li></ol>
+              
+              <ol start="646" class="context-line"><li onclick="toggle('pre4563250280', 'post4563250280')"><pre>            return self.get_prep_value(value)</pre> <span>...</span></li></ol>
+              
+                <ol start='647' class="post-context" id="post4563250280"><li onclick="toggle('pre4563250280', 'post4563250280')"><pre>        elif lookup_type in (&#39;range&#39;, &#39;in&#39;):</pre></li><li onclick="toggle('pre4563250280', 'post4563250280')"><pre>            return [self.get_prep_value(v) for v in value]</pre></li><li onclick="toggle('pre4563250280', 'post4563250280')"><pre>        elif lookup_type == &#39;year&#39;:</pre></li><li onclick="toggle('pre4563250280', 'post4563250280')"><pre>            try:</pre></li><li onclick="toggle('pre4563250280', 'post4563250280')"><pre>                return int(value)</pre></li><li onclick="toggle('pre4563250280', 'post4563250280')"><pre>            except ValueError:</pre></li></ol>
+              
+            </div>
+          
+
+          
+            <div class="commands">
+                
+                    <a href="#" onclick="return varToggle(this, '4563250280')"><span>&#x25b6;</span> Local vars</a>
+                
+            </div>
+            <table class="vars" id="v4563250280">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>lookup_type</td>
+                    <td class="code"><pre>&#39;exact&#39;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>self</td>
+                    <td class="code"><pre>&lt;django.db.models.fields.AutoField: id&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>value</td>
+                    <td class="code"><pre>Error in formatting: unsupported operand type(s) for +: &#39;int&#39; and &#39;str&#39;</pre></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+        </li>
+      
+        <li class="frame django">
+          <code>/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/db/models/fields/__init__.py</code> in <code>get_prep_value</code>
+
+          
+            <div class="context" id="c4563393424">
+              
+                <ol start="908" class="pre-context" id="pre4563393424"><li onclick="toggle('pre4563393424', 'post4563393424')"><pre>            value = connection.ops.validate_autopk_value(value)</pre></li><li onclick="toggle('pre4563393424', 'post4563393424')"><pre>        return value</pre></li><li onclick="toggle('pre4563393424', 'post4563393424')"><pre></pre></li><li onclick="toggle('pre4563393424', 'post4563393424')"><pre>    def get_prep_value(self, value):</pre></li><li onclick="toggle('pre4563393424', 'post4563393424')"><pre>        value = super(AutoField, self).get_prep_value(value)</pre></li><li onclick="toggle('pre4563393424', 'post4563393424')"><pre>        if value is None:</pre></li><li onclick="toggle('pre4563393424', 'post4563393424')"><pre>            return None</pre></li></ol>
+              
+              <ol start="915" class="context-line"><li onclick="toggle('pre4563393424', 'post4563393424')"><pre>        return int(value)</pre> <span>...</span></li></ol>
+              
+                <ol start='916' class="post-context" id="post4563393424"><li onclick="toggle('pre4563393424', 'post4563393424')"><pre></pre></li><li onclick="toggle('pre4563393424', 'post4563393424')"><pre>    def contribute_to_class(self, cls, name):</pre></li><li onclick="toggle('pre4563393424', 'post4563393424')"><pre>        assert not cls._meta.has_auto_field, \</pre></li><li onclick="toggle('pre4563393424', 'post4563393424')"><pre>            &quot;A model can&#39;t have more than one AutoField.&quot;</pre></li><li onclick="toggle('pre4563393424', 'post4563393424')"><pre>        super(AutoField, self).contribute_to_class(cls, name)</pre></li><li onclick="toggle('pre4563393424', 'post4563393424')"><pre>        cls._meta.has_auto_field = True</pre></li></ol>
+              
+            </div>
+          
+
+          
+            <div class="commands">
+                
+                    <a href="#" onclick="return varToggle(this, '4563393424')"><span>&#x25b6;</span> Local vars</a>
+                
+            </div>
+            <table class="vars" id="v4563393424">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr>
+                    <td>self</td>
+                    <td class="code"><pre>&lt;django.db.models.fields.AutoField: id&gt;</pre></td>
+                  </tr>
+                
+                  <tr>
+                    <td>value</td>
+                    <td class="code"><pre>Error in formatting: unsupported operand type(s) for +: &#39;int&#39; and &#39;str&#39;</pre></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          
+        </li>
+      
+    </ul>
+  </div>
+  
+  <form action="http://dpaste.com/" name="pasteform" id="pasteform" method="post">
+
+  <div id="pastebinTraceback" class="pastebin">
+    <input type="hidden" name="language" value="PythonConsole">
+    <input type="hidden" name="title" value="TypeError at /play">
+    <input type="hidden" name="source" value="Django Dpaste Agent">
+    <input type="hidden" name="poster" value="Django">
+    <textarea name="content" id="traceback_area" cols="140" rows="25">
+Environment:
+
+
+Request Method: POST
+Request URL: http://3b836cc8.ngrok.io/play
+
+Django Version: 1.7.4
+Python Version: 2.7.10
+Installed Applications:
+(&#39;django.contrib.admin&#39;,
+ &#39;django.contrib.auth&#39;,
+ &#39;django.contrib.contenttypes&#39;,
+ &#39;django.contrib.sessions&#39;,
+ &#39;django.contrib.messages&#39;,
+ &#39;django.contrib.staticfiles&#39;,
+ &#39;pennapps_f15.apps.users&#39;,
+ &#39;django_twilio&#39;,
+ &#39;debug_toolbar&#39;)
+Installed Middleware:
+(u&#39;debug_toolbar.middleware.DebugToolbarMiddleware&#39;,
+ &#39;django.contrib.sessions.middleware.SessionMiddleware&#39;,
+ &#39;django.middleware.common.CommonMiddleware&#39;,
+ &#39;django.middleware.csrf.CsrfViewMiddleware&#39;,
+ &#39;django.contrib.auth.middleware.AuthenticationMiddleware&#39;,
+ &#39;django.contrib.messages.middleware.MessageMiddleware&#39;,
+ &#39;django.middleware.clickjacking.XFrameOptionsMiddleware&#39;)
+
+
+Traceback:
+File "/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/core/handlers/base.py" in get_response
+  111.                     response = wrapped_callback(request, *callback_args, **callback_kwargs)
+File "/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/views/decorators/csrf.py" in wrapped_view
+  57.         return view_func(*args, **kwargs)
+File "/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django_twilio/decorators.py" in decorator
+  115.         response = f(request_or_self, *args, **kwargs)
+File "/Users/Dylan/Developer/gits/pennapps_f15/pennapps_f15/views.py" in play
+  88.     return play_station(playlist)
+File "/Users/Dylan/Developer/gits/pennapps_f15/pennapps_f15/views.py" in play_station
+  109.     playlist = Playlist.objects.get(pk=pid)
+File "/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/db/models/manager.py" in manager_method
+  92.                 return getattr(self.get_queryset(), name)(*args, **kwargs)
+File "/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/db/models/query.py" in get
+  345.         clone = self.filter(*args, **kwargs)
+File "/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/db/models/query.py" in filter
+  691.         return self._filter_or_exclude(False, *args, **kwargs)
+File "/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/db/models/query.py" in _filter_or_exclude
+  709.             clone.query.add_q(Q(*args, **kwargs))
+File "/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/db/models/sql/query.py" in add_q
+  1331.         clause, require_inner = self._add_q(where_part, self.used_aliases)
+File "/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/db/models/sql/query.py" in _add_q
+  1358.                     current_negated=current_negated, connector=connector)
+File "/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/db/models/sql/query.py" in build_filter
+  1230.             condition = self.build_lookup(lookups, col, value)
+File "/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/db/models/sql/query.py" in build_lookup
+  1138.                     return final_lookup(lhs, rhs)
+File "/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/db/models/lookups.py" in __init__
+  82.         self.rhs = self.get_prep_lookup()
+File "/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/db/models/lookups.py" in get_prep_lookup
+  85.         return self.lhs.output_field.get_prep_lookup(self.lookup_name, self.rhs)
+File "/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/db/models/fields/__init__.py" in get_prep_lookup
+  646.             return self.get_prep_value(value)
+File "/Users/Dylan/Developer/gits/pennapps_f15/venv/lib/python2.7/site-packages/django/db/models/fields/__init__.py" in get_prep_value
+  915.         return int(value)
+
+Exception Type: TypeError at /play
+Exception Value: int() argument must be a string or a number, not &#39;Playlist&#39;
+</textarea>
+  <br><br>
+  <input type="submit" value="Share this traceback on a public Web site">
+  </div>
+</form>
+</div>
+
+
+
+<div id="requestinfo">
+  <h2>Request information</h2>
+
+
+  <h3 id="get-info">GET</h3>
+  
+    <p>No GET data</p>
+  
+
+  <h3 id="post-info">POST</h3>
+  
+    <table class="req">
+      <thead>
+        <tr>
+          <th>Variable</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+          <tr>
+            <td>FromZip</td>
+            <td class="code"><pre>u&#39;98101&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>From</td>
+            <td class="code"><pre>u&#39;+14254959659&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>FromCity</td>
+            <td class="code"><pre>u&#39;SEATTLE&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>ApiVersion</td>
+            <td class="code"><pre>u&#39;2010-04-01&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>To</td>
+            <td class="code"><pre>u&#39;+13042546417&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>CallStatus</td>
+            <td class="code"><pre>u&#39;in-progress&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>CalledState</td>
+            <td class="code"><pre>u&#39;WV&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>FromState</td>
+            <td class="code"><pre>u&#39;WA&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>Direction</td>
+            <td class="code"><pre>u&#39;inbound&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>ToCity</td>
+            <td class="code"><pre>u&#39;BECKLEY&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>ToZip</td>
+            <td class="code"><pre>u&#39;25847&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>msg</td>
+            <td class="code"><pre>u&#39;Gather End&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>Digits</td>
+            <td class="code"><pre>u&#39;8&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>CallerCity</td>
+            <td class="code"><pre>u&#39;SEATTLE&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>FromCountry</td>
+            <td class="code"><pre>u&#39;US&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>CalledCity</td>
+            <td class="code"><pre>u&#39;BECKLEY&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>CalledCountry</td>
+            <td class="code"><pre>u&#39;US&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>Caller</td>
+            <td class="code"><pre>u&#39;+14254959659&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>CallerZip</td>
+            <td class="code"><pre>u&#39;98101&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>AccountSid</td>
+            <td class="code"><pre>u&#39;AC6cf64322b5c685a8f1bb0bf3254841b0&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>Called</td>
+            <td class="code"><pre>u&#39;+13042546417&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>CallerCountry</td>
+            <td class="code"><pre>u&#39;US&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>CalledZip</td>
+            <td class="code"><pre>u&#39;25847&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>CallSid</td>
+            <td class="code"><pre>u&#39;CAb124a9cebfb91952a40f55b6202c9bf1&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>CallerState</td>
+            <td class="code"><pre>u&#39;WA&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>ToCountry</td>
+            <td class="code"><pre>u&#39;US&#39;</pre></td>
+          </tr>
+        
+          <tr>
+            <td>ToState</td>
+            <td class="code"><pre>u&#39;WV&#39;</pre></td>
+          </tr>
+        
+      </tbody>
+    </table>
+  
+  <h3 id="files-info">FILES</h3>
+  
+    <p>No FILES data</p>
+  
+
+
+  <h3 id="cookie-info">COOKIES</h3>
+  
+    <p>No cookie data</p>
+  
+
+  <h3 id="meta-info">META</h3>
+  <table class="req">
+    <thead>
+      <tr>
+        <th>Variable</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>RUN_MAIN</td>
+          <td class="code"><pre>&#39;true&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>HTTP_REFERER</td>
+          <td class="code"><pre>&#39;http://3b836cc8.ngrok.io/&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SERVER_PROTOCOL</td>
+          <td class="code"><pre>&#39;HTTP/1.1&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SERVER_SOFTWARE</td>
+          <td class="code"><pre>&#39;WSGIServer/0.1 Python/2.7.10&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SCRIPT_NAME</td>
+          <td class="code"><pre>u&#39;&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>HTTP_X_TWILIO_SIGNATURE</td>
+          <td class="code"><pre>&#39;FH+uutPezc1Oz4rBgq2Oznv9jNU=&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>REQUEST_METHOD</td>
+          <td class="code"><pre>&#39;POST&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LOGNAME</td>
+          <td class="code"><pre>&#39;Dylan&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>USER</td>
+          <td class="code"><pre>&#39;Dylan&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>PATH</td>
+          <td class="code"><pre>&#39;/Users/Dylan/Developer/gits/pennapps_f15/venv/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/git/bin:/usr/texbin:/Applications/Postgres.app/Contents/Versions/9.3/bin&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>QUERY_STRING</td>
+          <td class="code"><pre>&#39;&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>HOME</td>
+          <td class="code"><pre>&#39;/Users/Dylan&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DISPLAY</td>
+          <td class="code"><pre>&#39;/private/tmp/com.apple.launchd.h1izG4SCCH/org.macosforge.xquartz:0&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TERM_PROGRAM</td>
+          <td class="code"><pre>&#39;iTerm.app&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LANG</td>
+          <td class="code"><pre>&#39;en_US.UTF-8&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>VIRTUAL_ENV</td>
+          <td class="code"><pre>&#39;/Users/Dylan/Developer/gits/pennapps_f15/venv&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SHELL</td>
+          <td class="code"><pre>&#39;/bin/bash&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TZ</td>
+          <td class="code"><pre>&#39;UTC&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SERVER_NAME</td>
+          <td class="code"><pre>&#39;1.0.0.127.in-addr.arpa&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>REMOTE_ADDR</td>
+          <td class="code"><pre>&#39;127.0.0.1&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SHLVL</td>
+          <td class="code"><pre>&#39;2&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TWILIO_ACCOUNT_SID</td>
+          <td class="code"><pre>&#39;AC6cf64322b5c685a8f1bb0bf3254841b0&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>XPC_FLAGS</td>
+          <td class="code"><pre>&#39;0x0&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>wsgi.url_scheme</td>
+          <td class="code"><pre>&#39;http&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>ITERM_SESSION_ID</td>
+          <td class="code"><pre>&#39;w0t1p0&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TMPDIR</td>
+          <td class="code"><pre>&#39;/var/folders/8x/74xf28052rv2cjqf0cw_4__w0000gn/T/&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SERVER_PORT</td>
+          <td class="code"><pre>&#39;8000&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>CONTENT_LENGTH</td>
+          <td class="code"><pre>&#39;501&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DJANGO_SECRET_KEY</td>
+          <td class="code"><pre>&#39;+[#*)q^yQOak*X5&lt;Oy].ds6O74AOslQeu3Y=U-g1Z9E2!$&lt;p[Ca?DRO;=|hbc*ZRpFIXTlJgKoCpxPA~F1+{0(^+L8si3oK^m7&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>wsgi.run_once</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SPOTIFY_CLIENT_ID</td>
+          <td class="code"><pre>&#39;6dc7e061ba2a458b8a116ca03222874d&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>XPC_SERVICE_NAME</td>
+          <td class="code"><pre>&#39;0&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SSH_AUTH_SOCK</td>
+          <td class="code"><pre>&#39;/private/tmp/com.apple.launchd.MaVmbvessf/Listeners&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TERM</td>
+          <td class="code"><pre>&#39;xterm-256color&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TWILIO_AUTH_TOKEN</td>
+          <td class="code"><pre>&#39;74c41e9ad304d19350f194c10cba753f&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>wsgi.input</td>
+          <td class="code"><pre>&lt;socket._fileobject object at 0x10ff7f950&gt;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>Apple_PubSub_Socket_Render</td>
+          <td class="code"><pre>&#39;/private/tmp/com.apple.launchd.XXj8tmJdPL/Render&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>HTTP_HOST</td>
+          <td class="code"><pre>&#39;3b836cc8.ngrok.io&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>wsgi.multithread</td>
+          <td class="code"><pre>True</pre></td>
+        </tr>
+      
+        <tr>
+          <td>ITERM_PROFILE</td>
+          <td class="code"><pre>&#39;Default&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>HTTP_CONNECTION</td>
+          <td class="code"><pre>&#39;close&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SOUNDCLOUD_CLIENT_ID</td>
+          <td class="code"><pre>&#39;426a3e727f210b08fd411dd22ece217f&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>HTTP_CACHE_CONTROL</td>
+          <td class="code"><pre>&#39;max-age=259200&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>_</td>
+          <td class="code"><pre>&#39;/Users/Dylan/Developer/gits/pennapps_f15/venv/bin/python&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>wsgi.version</td>
+          <td class="code"><pre>(1, 0)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>HTTP_USER_AGENT</td>
+          <td class="code"><pre>&#39;TwilioProxy/1.1&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>GATEWAY_INTERFACE</td>
+          <td class="code"><pre>&#39;CGI/1.1&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>HTTP_X_FORWARDED_FOR</td>
+          <td class="code"><pre>&#39;52.21.200.58&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>CSRF_COOKIE</td>
+          <td class="code"><pre>u&#39;YKfoNqN9qr1hsVXWCUMGdTgQf5jwmjkt&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>wsgi.errors</td>
+          <td class="code"><pre>&lt;open file &#39;&lt;stderr&gt;&#39;, mode &#39;w&#39; at 0x10daa81e0&gt;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>wsgi.multiprocess</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>__CF_USER_TEXT_ENCODING</td>
+          <td class="code"><pre>&#39;0x1F5:0x0:0x0&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DATABASE_URL</td>
+          <td class="code"><pre>&#39;postgres://fwvkabplrbmede:1Vb3lc0ghOHIi2REb-ysTWSd0T@ec2-54-197-245-93.compute-1.amazonaws.com:5432/d28r1lvse2mec7&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>PWD</td>
+          <td class="code"><pre>&#39;/Users/Dylan/developer/gits/pennapps_f15&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DJANGO_SETTINGS_MODULE</td>
+          <td class="code"><pre>&#39;pennapps_f15.settings.development&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>CONTENT_TYPE</td>
+          <td class="code"><pre>&#39;application/x-www-form-urlencoded; charset=UTF-8&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>wsgi.file_wrapper</td>
+          <td class="code"><pre>&#39;&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>REMOTE_HOST</td>
+          <td class="code"><pre>&#39;&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>PATH_INFO</td>
+          <td class="code"><pre>u&#39;/play&#39;</pre></td>
+        </tr>
+      
+    </tbody>
+  </table>
+
+
+  <h3 id="settings-info">Settings</h3>
+  <h4>Using settings module <code>pennapps_f15.settings.development</code></h4>
+  <table class="req">
+    <thead>
+      <tr>
+        <th>Setting</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>USE_L10N</td>
+          <td class="code"><pre>True</pre></td>
+        </tr>
+      
+        <tr>
+          <td>USE_THOUSAND_SEPARATOR</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>CSRF_COOKIE_SECURE</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LANGUAGE_CODE</td>
+          <td class="code"><pre>&#39;en&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>ROOT_URLCONF</td>
+          <td class="code"><pre>&#39;pennapps_f15.urls&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>MANAGERS</td>
+          <td class="code"><pre>((&#39;author&#39;, &#39;email&#39;),)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TEST_NON_SERIALIZED_APPS</td>
+          <td class="code"><pre>[]</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DEFAULT_CHARSET</td>
+          <td class="code"><pre>&#39;utf-8&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SESSION_SERIALIZER</td>
+          <td class="code"><pre>&#39;django.contrib.sessions.serializers.JSONSerializer&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>STATIC_ROOT</td>
+          <td class="code"><pre>&#39;/Users/Dylan/Developer/gits/pennapps_f15/public/static&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>ALLOWED_HOSTS</td>
+          <td class="code"><pre>(&#39;*&#39;,)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>MESSAGE_STORAGE</td>
+          <td class="code"><pre>&#39;django.contrib.messages.storage.fallback.FallbackStorage&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>EMAIL_SUBJECT_PREFIX</td>
+          <td class="code"><pre>&#39;[Django] &#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SEND_BROKEN_LINK_EMAILS</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>STATICFILES_FINDERS</td>
+          <td class="code"><pre>(&#39;django.contrib.staticfiles.finders.FileSystemFinder&#39;,
+ &#39;django.contrib.staticfiles.finders.AppDirectoriesFinder&#39;)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SESSION_CACHE_ALIAS</td>
+          <td class="code"><pre>&#39;default&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SESSION_COOKIE_DOMAIN</td>
+          <td class="code"><pre>None</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SESSION_COOKIE_NAME</td>
+          <td class="code"><pre>&#39;sessionid&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>ADMIN_FOR</td>
+          <td class="code"><pre>()</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TIME_INPUT_FORMATS</td>
+          <td class="code"><pre>(&#39;%H:%M:%S&#39;, &#39;%H:%M:%S.%f&#39;, &#39;%H:%M&#39;)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DATABASES</td>
+          <td class="code"><pre>{&#39;default&#39;: {&#39;ATOMIC_REQUESTS&#39;: False,
+             &#39;AUTOCOMMIT&#39;: True,
+             &#39;CONN_MAX_AGE&#39;: 0,
+             &#39;ENGINE&#39;: &#39;django.db.backends.sqlite3&#39;,
+             &#39;HOST&#39;: &#39;&#39;,
+             &#39;NAME&#39;: &#39;/Users/Dylan/Developer/gits/pennapps_f15/tmp/db.sqlite3&#39;,
+             &#39;OPTIONS&#39;: {},
+             &#39;PASSWORD&#39;: u&#39;********************&#39;,
+             &#39;PORT&#39;: &#39;&#39;,
+             &#39;TEST&#39;: {&#39;CHARSET&#39;: None,
+                      &#39;COLLATION&#39;: None,
+                      &#39;MIRROR&#39;: None,
+                      &#39;NAME&#39;: None},
+             &#39;TIME_ZONE&#39;: &#39;UTC&#39;,
+             &#39;USER&#39;: &#39;&#39;}}</pre></td>
+        </tr>
+      
+        <tr>
+          <td>FILE_UPLOAD_DIRECTORY_PERMISSIONS</td>
+          <td class="code"><pre>None</pre></td>
+        </tr>
+      
+        <tr>
+          <td>FILE_UPLOAD_PERMISSIONS</td>
+          <td class="code"><pre>None</pre></td>
+        </tr>
+      
+        <tr>
+          <td>FILE_UPLOAD_HANDLERS</td>
+          <td class="code"><pre>(&#39;django.core.files.uploadhandler.MemoryFileUploadHandler&#39;,
+ &#39;django.core.files.uploadhandler.TemporaryFileUploadHandler&#39;)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DEFAULT_CONTENT_TYPE</td>
+          <td class="code"><pre>&#39;text/html&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>APPEND_SLASH</td>
+          <td class="code"><pre>True</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LOCALE_PATHS</td>
+          <td class="code"><pre>&#39;/Users/Dylan/Developer/gits/pennapps_f15/locale&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DATABASE_ROUTERS</td>
+          <td class="code"><pre>[]</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DEFAULT_TABLESPACE</td>
+          <td class="code"><pre>&#39;&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>YEAR_MONTH_FORMAT</td>
+          <td class="code"><pre>&#39;F Y&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>STATICFILES_STORAGE</td>
+          <td class="code"><pre>&#39;django.contrib.staticfiles.storage.StaticFilesStorage&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>CACHES</td>
+          <td class="code"><pre>{&#39;default&#39;: {&#39;BACKEND&#39;: &#39;django.core.cache.backends.locmem.LocMemCache&#39;}}</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SPOTIFY_CLIENT_ID</td>
+          <td class="code"><pre>&#39;6dc7e061ba2a458b8a116ca03222874d&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SERVER_EMAIL</td>
+          <td class="code"><pre>&#39;root@localhost&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SESSION_COOKIE_PATH</td>
+          <td class="code"><pre>&#39;/&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SILENCED_SYSTEM_CHECKS</td>
+          <td class="code"><pre>[]</pre></td>
+        </tr>
+      
+        <tr>
+          <td>MIDDLEWARE_CLASSES</td>
+          <td class="code"><pre>(u&#39;debug_toolbar.middleware.DebugToolbarMiddleware&#39;,
+ &#39;django.contrib.sessions.middleware.SessionMiddleware&#39;,
+ &#39;django.middleware.common.CommonMiddleware&#39;,
+ &#39;django.middleware.csrf.CsrfViewMiddleware&#39;,
+ &#39;django.contrib.auth.middleware.AuthenticationMiddleware&#39;,
+ &#39;django.contrib.messages.middleware.MessageMiddleware&#39;,
+ &#39;django.middleware.clickjacking.XFrameOptionsMiddleware&#39;)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>USE_I18N</td>
+          <td class="code"><pre>True</pre></td>
+        </tr>
+      
+        <tr>
+          <td>THOUSAND_SEPARATOR</td>
+          <td class="code"><pre>&#39;,&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SECRET_KEY</td>
+          <td class="code"><pre>u&#39;********************&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LANGUAGE_COOKIE_NAME</td>
+          <td class="code"><pre>&#39;django_language&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DEFAULT_INDEX_TABLESPACE</td>
+          <td class="code"><pre>&#39;&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TRANSACTIONS_MANAGED</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LOGGING_CONFIG</td>
+          <td class="code"><pre>&#39;logging.config.dictConfig&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TEMPLATE_LOADERS</td>
+          <td class="code"><pre>(&#39;django.template.loaders.filesystem.Loader&#39;,
+ &#39;django.template.loaders.app_directories.Loader&#39;)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>FIRST_DAY_OF_WEEK</td>
+          <td class="code"><pre>0</pre></td>
+        </tr>
+      
+        <tr>
+          <td>WSGI_APPLICATION</td>
+          <td class="code"><pre>&#39;pennapps_f15.wsgi.application&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TEMPLATE_DEBUG</td>
+          <td class="code"><pre>True</pre></td>
+        </tr>
+      
+        <tr>
+          <td>X_FRAME_OPTIONS</td>
+          <td class="code"><pre>&#39;SAMEORIGIN&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>AUTHENTICATION_BACKENDS</td>
+          <td class="code"><pre>(&#39;django.contrib.auth.backends.ModelBackend&#39;,)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>FORCE_SCRIPT_NAME</td>
+          <td class="code"><pre>None</pre></td>
+        </tr>
+      
+        <tr>
+          <td>USE_X_FORWARDED_HOST</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SIGNING_BACKEND</td>
+          <td class="code"><pre>&#39;django.core.signing.TimestampSigner&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SESSION_COOKIE_SECURE</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>PROJECT_APP_ROOT</td>
+          <td class="code"><pre>&#39;/Users/Dylan/Developer/gits/pennapps_f15/pennapps_f15&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>CSRF_COOKIE_DOMAIN</td>
+          <td class="code"><pre>None</pre></td>
+        </tr>
+      
+        <tr>
+          <td>FILE_CHARSET</td>
+          <td class="code"><pre>&#39;utf-8&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DEBUG</td>
+          <td class="code"><pre>True</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SOUNDCLOUD_CLIENT_ID</td>
+          <td class="code"><pre>&#39;426a3e727f210b08fd411dd22ece217f&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LANGUAGE_COOKIE_DOMAIN</td>
+          <td class="code"><pre>None</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DEFAULT_FILE_STORAGE</td>
+          <td class="code"><pre>&#39;django.core.files.storage.FileSystemStorage&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>INSTALLED_APPS</td>
+          <td class="code"><pre>(&#39;django.contrib.admin&#39;,
+ &#39;django.contrib.auth&#39;,
+ &#39;django.contrib.contenttypes&#39;,
+ &#39;django.contrib.sessions&#39;,
+ &#39;django.contrib.messages&#39;,
+ &#39;django.contrib.staticfiles&#39;,
+ &#39;pennapps_f15.apps.users&#39;,
+ &#39;django_twilio&#39;,
+ &#39;debug_toolbar&#39;)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LANGUAGES</td>
+          <td class="code"><pre>(&#39;en&#39;, &lt;django.utils.functional.__proxy__ object at 0x10e278610&gt;)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>COMMENTS_ALLOW_PROFANITIES</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>STATICFILES_DIRS</td>
+          <td class="code"><pre>(&#39;/Users/Dylan/Developer/gits/pennapps_f15/static&#39;,)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>PREPEND_WWW</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SECURE_PROXY_SSL_HEADER</td>
+          <td class="code"><pre>(&#39;HTTP_X_FORWARDED_PROTO&#39;, &#39;https&#39;)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LANGUAGE_COOKIE_AGE</td>
+          <td class="code"><pre>None</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SESSION_COOKIE_HTTPONLY</td>
+          <td class="code"><pre>True</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DEBUG_PROPAGATE_EXCEPTIONS</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>INTERNAL_IPS</td>
+          <td class="code"><pre>(&#39;127.0.0.1&#39;,)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>MONTH_DAY_FORMAT</td>
+          <td class="code"><pre>&#39;F j&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LOGIN_URL</td>
+          <td class="code"><pre>&#39;/accounts/login/&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SESSION_EXPIRE_AT_BROWSER_CLOSE</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TIME_FORMAT</td>
+          <td class="code"><pre>&#39;P&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>AUTH_USER_MODEL</td>
+          <td class="code"><pre>&#39;auth.User&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DATE_INPUT_FORMATS</td>
+          <td class="code"><pre>(&#39;%Y-%m-%d&#39;,
+ &#39;%m/%d/%Y&#39;,
+ &#39;%m/%d/%y&#39;,
+ &#39;%b %d %Y&#39;,
+ &#39;%b %d, %Y&#39;,
+ &#39;%d %b %Y&#39;,
+ &#39;%d %b, %Y&#39;,
+ &#39;%B %d %Y&#39;,
+ &#39;%B %d, %Y&#39;,
+ &#39;%d %B %Y&#39;,
+ &#39;%d %B, %Y&#39;)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>CSRF_COOKIE_NAME</td>
+          <td class="code"><pre>&#39;csrftoken&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>EMAIL_HOST_PASSWORD</td>
+          <td class="code"><pre>u&#39;********************&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>PASSWORD_RESET_TIMEOUT_DAYS</td>
+          <td class="code"><pre>u&#39;********************&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SESSION_FILE_PATH</td>
+          <td class="code"><pre>None</pre></td>
+        </tr>
+      
+        <tr>
+          <td>CACHE_MIDDLEWARE_ALIAS</td>
+          <td class="code"><pre>&#39;default&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SESSION_SAVE_EVERY_REQUEST</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SECRET</td>
+          <td class="code"><pre>u&#39;********************&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>NUMBER_GROUPING</td>
+          <td class="code"><pre>0</pre></td>
+        </tr>
+      
+        <tr>
+          <td>HEROKU</td>
+          <td class="code"><pre>True</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SESSION_ENGINE</td>
+          <td class="code"><pre>&#39;django.contrib.sessions.backends.db&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>CSRF_FAILURE_VIEW</td>
+          <td class="code"><pre>&#39;django.views.csrf.csrf_failure&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>CSRF_COOKIE_PATH</td>
+          <td class="code"><pre>&#39;/&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LOGIN_REDIRECT_URL</td>
+          <td class="code"><pre>&#39;/accounts/profile/&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>PROJECT_ROOT</td>
+          <td class="code"><pre>&#39;/Users/Dylan/Developer/gits/pennapps_f15&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DECIMAL_SEPARATOR</td>
+          <td class="code"><pre>&#39;.&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>IGNORABLE_404_URLS</td>
+          <td class="code"><pre>()</pre></td>
+        </tr>
+      
+        <tr>
+          <td>MIGRATION_MODULES</td>
+          <td class="code"><pre>{}</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TEMPLATE_STRING_IF_INVALID</td>
+          <td class="code"><pre>&#39;&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TMP_PATH</td>
+          <td class="code"><pre>&#39;/Users/Dylan/Developer/gits/pennapps_f15/tmp&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LOGOUT_URL</td>
+          <td class="code"><pre>&#39;/accounts/logout/&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>EMAIL_USE_TLS</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>FIXTURE_DIRS</td>
+          <td class="code"><pre>()</pre></td>
+        </tr>
+      
+        <tr>
+          <td>EMAIL_HOST</td>
+          <td class="code"><pre>&#39;localhost&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DATE_FORMAT</td>
+          <td class="code"><pre>&#39;N j, Y&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>MEDIA_ROOT</td>
+          <td class="code"><pre>&#39;/Users/Dylan/Developer/gits/pennapps_f15/public/media&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DEFAULT_EXCEPTION_REPORTER_FILTER</td>
+          <td class="code"><pre>&#39;django.views.debug.SafeExceptionReporterFilter&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>ADMINS</td>
+          <td class="code"><pre>((&#39;author&#39;, &#39;email&#39;),)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>FORMAT_MODULE_PATH</td>
+          <td class="code"><pre>None</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DEFAULT_FROM_EMAIL</td>
+          <td class="code"><pre>&#39;webmaster@localhost&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>MEDIA_URL</td>
+          <td class="code"><pre>&#39;/media/&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DATETIME_FORMAT</td>
+          <td class="code"><pre>&#39;N j, Y, P&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TEMPLATE_DIRS</td>
+          <td class="code"><pre>(&#39;/Users/Dylan/Developer/gits/pennapps_f15/templates&#39;,)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SITE_ID</td>
+          <td class="code"><pre>1</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DISALLOWED_USER_AGENTS</td>
+          <td class="code"><pre>()</pre></td>
+        </tr>
+      
+        <tr>
+          <td>ALLOWED_INCLUDE_ROOTS</td>
+          <td class="code"><pre>()</pre></td>
+        </tr>
+      
+        <tr>
+          <td>PUBLIC_ROOT</td>
+          <td class="code"><pre>&#39;/Users/Dylan/Developer/gits/pennapps_f15/public&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LOGGING</td>
+          <td class="code"><pre>{&#39;disable_existing_loggers&#39;: False,
+ &#39;filters&#39;: {&#39;require_debug_false&#39;: {&#39;()&#39;: &#39;django.utils.log.RequireDebugFalse&#39;}},
+ &#39;formatters&#39;: {&#39;simple&#39;: {&#39;format&#39;: &#39;%(levelname)s %(message)s&#39;}},
+ &#39;handlers&#39;: {&#39;console&#39;: {&#39;class&#39;: &#39;logging.StreamHandler&#39;,
+                          &#39;formatter&#39;: &#39;simple&#39;,
+                          &#39;level&#39;: &#39;DEBUG&#39;},
+              &#39;mail_admins&#39;: {&#39;class&#39;: &#39;django.utils.log.AdminEmailHandler&#39;,
+                              &#39;filters&#39;: [&#39;require_debug_false&#39;],
+                              &#39;include_html&#39;: True,
+                              &#39;level&#39;: &#39;ERROR&#39;},
+              &#39;null&#39;: {&#39;class&#39;: &#39;django.utils.log.NullHandler&#39;,
+                       &#39;level&#39;: &#39;DEBUG&#39;}},
+ &#39;loggers&#39;: {&#39;django&#39;: {&#39;handlers&#39;: [&#39;mail_admins&#39;],
+                        &#39;level&#39;: &#39;ERROR&#39;,
+                        &#39;propagate&#39;: False},
+             &#39;django.db.backends&#39;: {&#39;handlers&#39;: [&#39;null&#39;], &#39;level&#39;: &#39;DEBUG&#39;},
+             &#39;py.warnings&#39;: {&#39;handlers&#39;: [&#39;null&#39;],
+                             &#39;level&#39;: &#39;WARNING&#39;,
+                             &#39;propagate&#39;: False}},
+ &#39;version&#39;: 1}</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SHORT_DATE_FORMAT</td>
+          <td class="code"><pre>&#39;m/d/Y&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TEST_RUNNER</td>
+          <td class="code"><pre>&#39;django.test.runner.DiscoverRunner&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>CACHE_MIDDLEWARE_KEY_PREFIX</td>
+          <td class="code"><pre>u&#39;********************&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TIME_ZONE</td>
+          <td class="code"><pre>&#39;UTC&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>FILE_UPLOAD_MAX_MEMORY_SIZE</td>
+          <td class="code"><pre>2621440</pre></td>
+        </tr>
+      
+        <tr>
+          <td>EMAIL_BACKEND</td>
+          <td class="code"><pre>&#39;django.core.mail.backends.console.EmailBackend&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>EMAIL_USE_SSL</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>TEMPLATE_CONTEXT_PROCESSORS</td>
+          <td class="code"><pre>(&#39;django.contrib.auth.context_processors.auth&#39;,
+ &#39;django.core.context_processors.debug&#39;,
+ &#39;django.core.context_processors.i18n&#39;,
+ &#39;django.core.context_processors.media&#39;,
+ &#39;django.core.context_processors.request&#39;,
+ &#39;django.core.context_processors.static&#39;,
+ &#39;django.core.context_processors.tz&#39;,
+ &#39;django.contrib.messages.context_processors.messages&#39;)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SESSION_COOKIE_AGE</td>
+          <td class="code"><pre>1209600</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SETTINGS_MODULE</td>
+          <td class="code"><pre>&#39;pennapps_f15.settings.development&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>USE_ETAGS</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LANGUAGES_BIDI</td>
+          <td class="code"><pre>(&#39;he&#39;, &#39;ar&#39;, &#39;fa&#39;, &#39;ur&#39;)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>FILE_UPLOAD_TEMP_DIR</td>
+          <td class="code"><pre>None</pre></td>
+        </tr>
+      
+        <tr>
+          <td>CSRF_COOKIE_AGE</td>
+          <td class="code"><pre>31449600</pre></td>
+        </tr>
+      
+        <tr>
+          <td>STATIC_URL</td>
+          <td class="code"><pre>&#39;/static/&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>EMAIL_PORT</td>
+          <td class="code"><pre>25</pre></td>
+        </tr>
+      
+        <tr>
+          <td>USE_TZ</td>
+          <td class="code"><pre>True</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SHORT_DATETIME_FORMAT</td>
+          <td class="code"><pre>&#39;m/d/Y P&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>PASSWORD_HASHERS</td>
+          <td class="code"><pre>u&#39;********************&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>ABSOLUTE_URL_OVERRIDES</td>
+          <td class="code"><pre>{}</pre></td>
+        </tr>
+      
+        <tr>
+          <td>LANGUAGE_COOKIE_PATH</td>
+          <td class="code"><pre>&#39;/&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>CACHE_MIDDLEWARE_SECONDS</td>
+          <td class="code"><pre>600</pre></td>
+        </tr>
+      
+        <tr>
+          <td>CSRF_COOKIE_HTTPONLY</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>DATETIME_INPUT_FORMATS</td>
+          <td class="code"><pre>(&#39;%Y-%m-%d %H:%M:%S&#39;,
+ &#39;%Y-%m-%d %H:%M:%S.%f&#39;,
+ &#39;%Y-%m-%d %H:%M&#39;,
+ &#39;%Y-%m-%d&#39;,
+ &#39;%m/%d/%Y %H:%M:%S&#39;,
+ &#39;%m/%d/%Y %H:%M:%S.%f&#39;,
+ &#39;%m/%d/%Y %H:%M&#39;,
+ &#39;%m/%d/%Y&#39;,
+ &#39;%m/%d/%y %H:%M:%S&#39;,
+ &#39;%m/%d/%y %H:%M:%S.%f&#39;,
+ &#39;%m/%d/%y %H:%M&#39;,
+ &#39;%m/%d/%y&#39;)</pre></td>
+        </tr>
+      
+        <tr>
+          <td>EMAIL_HOST_USER</td>
+          <td class="code"><pre>&#39;&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>PROFANITIES_LIST</td>
+          <td class="code"><pre>u&#39;********************&#39;</pre></td>
+        </tr>
+      
+    </tbody>
+  </table>
+
+</div>
+
+  <div id="explanation">
+    <p>
+      You're seeing this error because you have <code>DEBUG = True</code> in your
+      Django settings file. Change that to <code>False</code>, and Django will
+      display a standard 500 page.
+    </p>
+  </div>
+
+
+<style type="text/css">
+@media print { #djDebug {display:none;}}
+</style>
+<link rel="stylesheet" href="/static/debug_toolbar/css/toolbar.css" type="text/css" />
+
+<!-- Prevent our copy of jQuery from registering as an AMD module on sites that use RequireJS. -->
+<script>var _djdt_define_backup = window.define; window.define = undefined;</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<script>var djdt = {jQuery: jQuery.noConflict(true)}; window.define = _djdt_define_backup;</script>
+
+<script src="/static/debug_toolbar/js/toolbar.js"></script>
+<div id="djDebug" style="display:none;" dir="ltr"
+     data-store-id="7279ca6964df496e9207d94053c3883a" data-render-panel-url="/__debug__/render_panel/"
+     >
+  <div style="display:none;" id="djDebugToolbar">
+    <ul id="djDebugPanelList">
+      
+      <li><a id="djHideToolBarButton" href="#" title="Hide toolbar">Hide &#187;</a></li>
+      
+      
+        <li class="djDebugPanelButton">
+          <input type="checkbox" data-cookie="djdtVersionsPanel" checked="checked" title="Disable for next and successive requests" />
+          
+            <a href="#" title="Versions" class="VersionsPanel">
+          
+          Versions
+          
+          
+            <br /><small>Django 1.7.4</small>
+          
+          
+          
+            </a>
+          
+        </li>
+      
+        <li class="djDebugPanelButton">
+          <input type="checkbox" data-cookie="djdtTimerPanel" checked="checked" title="Disable for next and successive requests" />
+          
+            <a href="#" title="Time" class="TimerPanel">
+          
+          Time
+          
+          
+            <br /><small>CPU: 4390.75ms (10457.75ms)</small>
+          
+          
+          
+            </a>
+          
+        </li>
+      
+        <li class="djDebugPanelButton">
+          <input type="checkbox" data-cookie="djdtSettingsPanel" checked="checked" title="Disable for next and successive requests" />
+          
+            <a href="#" title="Settings from &lt;code&gt;pennapps_f15.settings.development&lt;/code&gt;" class="SettingsPanel">
+          
+          Settings
+          
+          
+            
+          
+          
+          
+            </a>
+          
+        </li>
+      
+        <li class="djDebugPanelButton">
+          <input type="checkbox" data-cookie="djdtHeadersPanel" checked="checked" title="Disable for next and successive requests" />
+          
+            <a href="#" title="Headers" class="HeadersPanel">
+          
+          Headers
+          
+          
+            
+          
+          
+          
+            </a>
+          
+        </li>
+      
+        <li class="djDebugPanelButton">
+          <input type="checkbox" data-cookie="djdtRequestPanel" checked="checked" title="Disable for next and successive requests" />
+          
+            <a href="#" title="Request" class="RequestPanel">
+          
+          Request
+          
+          
+            <br /><small>play</small>
+          
+          
+          
+            </a>
+          
+        </li>
+      
+        <li class="djDebugPanelButton">
+          <input type="checkbox" data-cookie="djdtSQLPanel" checked="checked" title="Disable for next and successive requests" />
+          
+            <a href="#" title="SQL queries from 1 connection" class="SQLPanel">
+          
+          SQL
+          
+          
+            <br /><small>80 queries in 190.45ms</small>
+          
+          
+          
+            </a>
+          
+        </li>
+      
+        <li class="djDebugPanelButton">
+          <input type="checkbox" data-cookie="djdtStaticFilesPanel" checked="checked" title="Disable for next and successive requests" />
+          
+            <a href="#" title="Static files (76 found, 0 used)" class="StaticFilesPanel">
+          
+          Static files
+          
+          
+            <br /><small>0 files used</small>
+          
+          
+          
+            </a>
+          
+        </li>
+      
+        <li class="djDebugPanelButton">
+          <input type="checkbox" data-cookie="djdtTemplatesPanel" checked="checked" title="Disable for next and successive requests" />
+          
+            <a href="#" title="Templates (1 rendered)" class="TemplatesPanel">
+          
+          Templates
+          
+          
+            <br /><small>Technical 500 template</small>
+          
+          
+          
+            </a>
+          
+        </li>
+      
+        <li class="djDebugPanelButton">
+          <input type="checkbox" data-cookie="djdtCachePanel" checked="checked" title="Disable for next and successive requests" />
+          
+            <a href="#" title="Cache calls from 1 backend" class="CachePanel">
+          
+          Cache
+          
+          
+            <br /><small>0 calls in 0.00ms</small>
+          
+          
+          
+            </a>
+          
+        </li>
+      
+        <li class="djDebugPanelButton">
+          <input type="checkbox" data-cookie="djdtSignalsPanel" checked="checked" title="Disable for next and successive requests" />
+          
+            <a href="#" title="Signals" class="SignalsPanel">
+          
+          Signals
+          
+          
+            <br /><small>13 receivers of 12 signals</small>
+          
+          
+          
+            </a>
+          
+        </li>
+      
+        <li class="djDebugPanelButton">
+          <input type="checkbox" data-cookie="djdtLoggingPanel" checked="checked" title="Disable for next and successive requests" />
+          
+            <a href="#" title="Log messages" class="LoggingPanel">
+          
+          Logging
+          
+          
+            <br /><small>40 messages</small>
+          
+          
+          
+            </a>
+          
+        </li>
+      
+        <li class="djDebugPanelButton">
+          <input type="checkbox" data-cookie="djdtRedirectsPanel" title="Enable for next and successive requests" />
+          
+            <div class="djdt-contentless djdt-disabled">
+          
+          Intercept redirects
+          
+          
+            </div>
+          
+        </li>
+      
+    </ul>
+  </div>
+  <div style="display:none;" id="djDebugToolbarHandle">
+    <span title="Show toolbar" id="djShowToolBarButton">&#171;</span>
+  </div>
+  
+    
+      <div id="VersionsPanel" class="djdt-panelContent">
+        <div class="djDebugPanelTitle">
+          <a href="" class="djDebugClose"></a>
+          <h3>Versions</h3>
+        </div>
+        <div class="djDebugPanelContent">
+          
+          <img src="/static/debug_toolbar/img/ajax-loader.gif" alt="loading" class="djdt-loader" />
+          <div class="djdt-scroll"></div>
+          
+        </div>
+      </div>
+    
+  
+    
+      <div id="TimerPanel" class="djdt-panelContent">
+        <div class="djDebugPanelTitle">
+          <a href="" class="djDebugClose"></a>
+          <h3>Time</h3>
+        </div>
+        <div class="djDebugPanelContent">
+          
+          <img src="/static/debug_toolbar/img/ajax-loader.gif" alt="loading" class="djdt-loader" />
+          <div class="djdt-scroll"></div>
+          
+        </div>
+      </div>
+    
+  
+    
+      <div id="SettingsPanel" class="djdt-panelContent">
+        <div class="djDebugPanelTitle">
+          <a href="" class="djDebugClose"></a>
+          <h3>Settings from <code>pennapps_f15.settings.development</code></h3>
+        </div>
+        <div class="djDebugPanelContent">
+          
+          <img src="/static/debug_toolbar/img/ajax-loader.gif" alt="loading" class="djdt-loader" />
+          <div class="djdt-scroll"></div>
+          
+        </div>
+      </div>
+    
+  
+    
+      <div id="HeadersPanel" class="djdt-panelContent">
+        <div class="djDebugPanelTitle">
+          <a href="" class="djDebugClose"></a>
+          <h3>Headers</h3>
+        </div>
+        <div class="djDebugPanelContent">
+          
+          <img src="/static/debug_toolbar/img/ajax-loader.gif" alt="loading" class="djdt-loader" />
+          <div class="djdt-scroll"></div>
+          
+        </div>
+      </div>
+    
+  
+    
+      <div id="RequestPanel" class="djdt-panelContent">
+        <div class="djDebugPanelTitle">
+          <a href="" class="djDebugClose"></a>
+          <h3>Request</h3>
+        </div>
+        <div class="djDebugPanelContent">
+          
+          <img src="/static/debug_toolbar/img/ajax-loader.gif" alt="loading" class="djdt-loader" />
+          <div class="djdt-scroll"></div>
+          
+        </div>
+      </div>
+    
+  
+    
+      <div id="SQLPanel" class="djdt-panelContent">
+        <div class="djDebugPanelTitle">
+          <a href="" class="djDebugClose"></a>
+          <h3>SQL queries from 1 connection</h3>
+        </div>
+        <div class="djDebugPanelContent">
+          
+          <img src="/static/debug_toolbar/img/ajax-loader.gif" alt="loading" class="djdt-loader" />
+          <div class="djdt-scroll"></div>
+          
+        </div>
+      </div>
+    
+  
+    
+      <div id="StaticFilesPanel" class="djdt-panelContent">
+        <div class="djDebugPanelTitle">
+          <a href="" class="djDebugClose"></a>
+          <h3>Static files (76 found, 0 used)</h3>
+        </div>
+        <div class="djDebugPanelContent">
+          
+          <img src="/static/debug_toolbar/img/ajax-loader.gif" alt="loading" class="djdt-loader" />
+          <div class="djdt-scroll"></div>
+          
+        </div>
+      </div>
+    
+  
+    
+      <div id="TemplatesPanel" class="djdt-panelContent">
+        <div class="djDebugPanelTitle">
+          <a href="" class="djDebugClose"></a>
+          <h3>Templates (1 rendered)</h3>
+        </div>
+        <div class="djDebugPanelContent">
+          
+          <img src="/static/debug_toolbar/img/ajax-loader.gif" alt="loading" class="djdt-loader" />
+          <div class="djdt-scroll"></div>
+          
+        </div>
+      </div>
+    
+  
+    
+      <div id="CachePanel" class="djdt-panelContent">
+        <div class="djDebugPanelTitle">
+          <a href="" class="djDebugClose"></a>
+          <h3>Cache calls from 1 backend</h3>
+        </div>
+        <div class="djDebugPanelContent">
+          
+          <img src="/static/debug_toolbar/img/ajax-loader.gif" alt="loading" class="djdt-loader" />
+          <div class="djdt-scroll"></div>
+          
+        </div>
+      </div>
+    
+  
+    
+      <div id="SignalsPanel" class="djdt-panelContent">
+        <div class="djDebugPanelTitle">
+          <a href="" class="djDebugClose"></a>
+          <h3>Signals</h3>
+        </div>
+        <div class="djDebugPanelContent">
+          
+          <img src="/static/debug_toolbar/img/ajax-loader.gif" alt="loading" class="djdt-loader" />
+          <div class="djdt-scroll"></div>
+          
+        </div>
+      </div>
+    
+  
+    
+      <div id="LoggingPanel" class="djdt-panelContent">
+        <div class="djDebugPanelTitle">
+          <a href="" class="djDebugClose"></a>
+          <h3>Log messages</h3>
+        </div>
+        <div class="djDebugPanelContent">
+          
+          <img src="/static/debug_toolbar/img/ajax-loader.gif" alt="loading" class="djdt-loader" />
+          <div class="djdt-scroll"></div>
+          
+        </div>
+      </div>
+    
+  
+    
+  
+  <div id="djDebugWindow" class="djdt-panelContent"></div>
+</div>
+</body>
+</html>

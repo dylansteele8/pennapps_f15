@@ -6,6 +6,8 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(PROJECT_APP_ROOT))
 PUBLIC_ROOT = os.path.abspath(os.path.join(PROJECT_ROOT, 'public'))
 
 SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
+SOUNDCLOUD_CLIENT_ID = os.environ['SOUNDCLOUD_CLIENT_ID']
+SPOTIFY_CLIENT_ID=os.environ['SPOTIFY_CLIENT_ID']
 
 DEBUG = False
 TEMPLATE_DEBUG = False
@@ -40,7 +42,6 @@ INSTALLED_APPS = (
     'pennapps_f15.apps.users',
     'django_twilio',
     # 'storages',
-    # '{{ project_name }}.apps.accounts',
 )
 
 MIDDLEWARE_CLASSES = (
