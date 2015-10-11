@@ -42,7 +42,7 @@ def play(request):
             station_id = int(n)
         else:
             resp.say("Please enter a valid genre or station ID")
-            return redirect('home')
+            return redirect('/home')
     return play_station(station_id)
 
 
