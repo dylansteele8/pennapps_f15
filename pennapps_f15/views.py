@@ -42,8 +42,9 @@ def play(request):
             station_id = int(n)
         else:
             resp.say("Please enter a valid genre or station ID")
-            return redirect('/home')
+            return redirect('home')
     return play_station(station_id)
+    
 
 
 def create_station(genre, phone_number):
@@ -86,6 +87,7 @@ def play_station(station_id):
         print song_to_play.url
         g.play(song_to_play.url)
     resp.redirect(url="/controls", method="GET")
+    print resp
     return resp
 
 
