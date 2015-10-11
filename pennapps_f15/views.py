@@ -1,65 +1,21 @@
-from django.shortcuts import render
 import twilio.twiml
-from django_twilio.decorators import twilio_view
 import soundcloud
-import requests
-import urllib
-import json
-import random
+import requests,urllib,json
+from unidecode import unidecode
 from apps.users.models import *
-from pennapps_f15.settings.production import SOUNDCLOUD_CLIENT_ID
+from django.conf import settings
+from django_twilio.decorators import twilio_view
+from django.shortcuts import render, redirect
 
+MAX_DURATION = 300000 #in ms 
 GENRES = ["Jazz", 
           "Hip Hop", "Blues", "Indie Pop", 
           "Country", "Reggae", "Pop", 
           "Classical", "Bluegrass", "RB"]
 
-def previous_track(user):
-    user.playlist.current_song -= 2
-    user.playlist.save()
-    return play_station(user.playlist.pk)
 
-
-def next_track(user):
-    return play_station(user.playlist.pk)
-
-
-def dislike(user):
-    playlist_song = user.playlist.songs.get(index=user.playlist.current_song-1)
-    user.disliked_songs.add(playlist_song.song)
-    user.save()
-    return play_station(user.playlist.pk)
-
-
-def save(user):
-    resp = twilio.twiml.Response()
-    resp.say("Enter %04d # next time to start where you left off or share with \
-              your friends" % (user.playlist.pk))
-    return resp
-
-ACTIONS = {
-            0: save, 
-            1: dislike, 2: None, 3: None, 
-            4: previous_track, 5: None, 6: next_track,
-            7: None, 8: None, 9: None 
-          }
-
-# Create your views here.
 @twilio_view
 def home(request):
-    # Get the caller's phone number from the incoming Twilio request
-    from_number = int(request.POST.get('From', None))
-    if from_number:
-        try:
-            MyUser.objects.get(phone_number=from_number)
-        except:
-            MyUser.objects.create(phone_number=from_number, 
-                                  playlist=Playlist.objects.create())
-
-    return menu()
-
-
-def menu():
     resp = twilio.twiml.Response()
     with resp.gather(action="/play") as g:
         g.say("Welcome to Phonograph")
@@ -67,78 +23,140 @@ def menu():
         for i in xrange(len(GENRES)):
             g.say("For " + GENRES[i] + ", press " + str(i))
         g.say("Or enter your station code and press pound")
+    resp.pause(length=3)
     return resp
 
 
 @twilio_view
 def play(request):    
-    from_number = request.POST.get('From', None)
-    user = MyUser.objects.get(phone_number=from_number)
     if request.method == 'POST':
-        n = request.POST.get('Digits', 1)
+        resp = twilio.twiml.Response()
+        n = request.POST.get('Digits', None)
+        phone_number = request.POST.get('From', None)
         if len(n) == 1:
             genre = GENRES[int(n)]
-            pid = create_station(user, genre)
+            resp.say("Starting new " + genre + " station")
+            station_id = create_station(genre, phone_number)
         elif len(n) == 4:
-            pid = int(n)
-    return play_station(pid)
+            resp.say("Resuming station " + n)
+            station_id = int(n)
+        else:
+            resp.say("Please enter a valid genre or station ID")
+            return redirect('home')
+    return play_station(station_id)
 
 
-def create_station(user, genre): 
+def create_station(genre, phone_number):
+    station = Station.objects.create()
+    account, created = Account.objects.get_or_create(phone_number=phone_number)
+    account.stations.add(station)
+    account.current_station = station
+    account.save()
     artists = get_artists(genre)
-    artists = artists['artists']['items']
-    client = soundcloud.Client(client_id=SOUNDCLOUD_CLIENT_ID)
+    client = soundcloud.Client(client_id=settings.SOUNDCLOUD_CLIENT_ID)
     for artist in artists:
         tracks = client.get('/tracks', q=artist['name'], streamable=True)
         for track in tracks:
-            if track.streamable:
-                song = Song.objects.create(title=track.title, sid=track.id, genre=track.genre)
-                playlist_song = PlaylistSong.objects.create(song=song, 
-                    index=user.playlist.songs.count())
-                user.playlist.songs.add(playlist_song)
-                break
-    return user.playlist.pk
+            if track.stream_url and track.streamable and track.duration < MAX_DURATION:
+                try:
+                    song = Song.objects.create(
+                        title=unidecode(track.title),
+                        sid=track.id, 
+                        genre=unidecode(track.genre)
+                    )
+                    station_song = StationSong.objects.create(
+                        song=song, 
+                        index=station.songs.count()
+                    )
+                    station.songs.add(station_song)
+                    station.save()
+                    break
+                except:
+                    print "SoundCloud fail >.<" + str(track)
+    return station.pk
 
-def play_station(pid):
+
+def play_station(station_id):
     resp = twilio.twiml.Response()
-    # for p in Playlist.objects.all():
-        # print(p.pk, p.current_song)
-    playlist = Playlist.objects.get(pk=pid)
-    song = playlist.songs.get(index=playlist.current_song)
+    station = Station.objects.get(pk=station_id)
+    song_to_play = station.songs.get(index=station.current_song)
+    print "SONG TO PLAY:", song_to_play
     with resp.gather(action="/controls", numDigits=1) as g:
-        g.say("Playing " + song.song.title)
-        g.play(song.url)
-        playlist.current_song += 1
-        playlist.save()
+        g.say("Playing " + song_to_play.song.title)
+        print song_to_play.url
+        g.play(song_to_play.url)
     resp.redirect(url="/controls", method="GET")
-
     return resp
 
+
 @twilio_view
-def controls(request):
-    num = 0
-    
+def controls(request):    
     if request.method == 'POST':
         from_number = request.POST.get('From', None)
-        user = MyUser.objects.get(phone_number=from_number)
         num = int(request.POST.get('Digits', 0))
     elif request.method == 'GET':
         from_number = request.GET.get('From', None)
-        user = MyUser.objects.get(phone_number=from_number)
         num = 6
+    account = Account.objects.get(phone_number=from_number)
+    station = account.current_station
 
-    return ACTIONS[num](user)
+    if num == 0:
+        return save(station)
+    elif num == 1:
+        return dislike(station)
+    elif num == 4:
+        return previous_track(station)
+    else:
+        return next_track(station)
 
 
 def get_artists(genre):
-    url = "https://api.spotify.com/v1/search?q=* genre:\"" + genre + "\"&type=artist&limit=10"
+    host = "api.spotify.com/v1/search"
+    url = "https://{0}?".format(host)
+    params = {
+        "q": "* genre:\"{0}\"".format(genre),
+        "type": "artist",
+        "limit": 10
+    }
     headers = { "User-Agent": "Mozilla/5.0" }
-    response = requests.get(url, headers=headers)
-    return json.loads(response.content)
+    response = requests.get(url, params=params, headers=headers)
+    json_response = json.loads(response.content)
+    artists = json_response['artists']['items']
+    return artists
 
 
-def get_top_songs(artist):
-    url = "https://api.spotify.com/v1/artists/" + artist + "/top-tracks?country=US"
-    headers = { "User-Agent": "Mozilla/5.0" }
-    response = requests.get(url, headers=headers)
-    return json.loads(response.content)
+def previous_track(station):
+    if station.current_song > 0:
+        station.current_song -= 1
+        station.save()
+    return play_station(station.pk)
+
+
+def next_track(station):
+    station.current_song += 1
+    station.save()
+    return play_station(station.pk)
+
+
+def dislike(station):
+    station_song = station.songs.get(index=station.current_song)
+    station.disliked_songs.add(station_song.song)
+    station.save()
+    remove_disliked_song(station)
+    return play_station(station.pk)
+
+
+def remove_disliked_song(station):
+    station.songs.get(index=station.current_song).delete()
+    for i in range(station.current_song + 1, station.songs.count() + 1):
+        song = station.songs.get(index=i)
+        song.index -= 1
+        song.save()
+    station.save()
+
+
+def save(station):
+    resp = twilio.twiml.Response()
+    resp.say("Enter %04d # next time to start where you left off or share with \
+              your friends" % (station.pk))
+    return resp

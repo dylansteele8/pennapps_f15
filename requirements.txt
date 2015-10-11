@@ -12,3 +12,4 @@ wsgiref==0.1.2
 django-twilio==0.8.0
 soundcloud
 requests
+unidecode

@@ -11,9 +11,9 @@ urlpatterns = patterns('',
 
 # Main URL Patterns
 urlpatterns += patterns('',
-    url(r'^$', 'pennapps_f15.views.home'),
-    url(r'^play$', 'pennapps_f15.views.play'),
-    url(r'^controls$', 'pennapps_f15.views.controls'),
+    url(r'^$', 'pennapps_f15.views.home', name='home'),
+    url(r'^play$', 'pennapps_f15.views.play', name='play'),
+    url(r'^controls$', 'pennapps_f15.views.controls', name='controls'),
 )
 
 # Development
